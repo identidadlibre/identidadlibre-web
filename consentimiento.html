@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Consentimiento Informado — IdentidadLibre Piloto Alpha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --ink: #0D1F0F; --ink-soft: #4A5E4C;
+  --leaf: #1B6B3A; --leaf-light: #D4EDD9; --leaf-xlight: #EDF7F0;
+  --stone: #F4F2ED; --stone-mid: #E8E5DD; --white: #FAFAF8;
+  --gold: #C4860A; --gold-light: #FFF3D6;
+  --rojo: #B91C1C; --rojo-light: #FEE2E2;
+}
+body { font-family: 'DM Sans', sans-serif; color: var(--ink); background: var(--stone); min-height: 100vh; padding: 40px 20px; }
+.page { max-width: 720px; margin: 0 auto; }
+
+/* Header nav */
+.back-link { display: inline-flex; align-items: center; gap: 6px; color: var(--leaf); font-size: .875rem; font-weight: 500; margin-bottom: 32px; text-decoration: none; }
+.back-link:hover { text-decoration: underline; }
+
+/* Document card */
+.doc-card { background: var(--white); border-radius: 20px; border: 1px solid var(--stone-mid); overflow: hidden; box-shadow: 0 4px 20px rgba(13,31,15,.08); }
+.doc-header { background: var(--ink); padding: 40px; color: #fff; }
+.doc-header-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
+.doc-logo { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: rgba(255,255,255,.5); text-transform: uppercase; letter-spacing: .1em; }
+.doc-badge { background: rgba(27,107,58,.35); border: 1px solid rgba(74,222,128,.3); color: #4ade80; padding: 4px 12px; border-radius: 100px; font-size: .75rem; font-weight: 500; }
+.doc-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: #fff; margin-bottom: 8px; }
+.doc-subtitle { color: rgba(255,255,255,.6); font-size: .9375rem; }
+.doc-meta { display: flex; gap: 24px; margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255,255,255,.1); }
+.doc-meta-item { font-size: .8125rem; color: rgba(255,255,255,.45); }
+.doc-meta-item strong { color: rgba(255,255,255,.7); display: block; margin-bottom: 2px; }
+
+/* Content */
+.doc-body { padding: 40px; }
+.critical-notice { background: var(--rojo-light); border: 1px solid rgba(185,28,28,.2); border-radius: 12px; padding: 16px 20px; margin-bottom: 32px; display: flex; gap: 12px; align-items: flex-start; }
+.critical-notice .icon { font-size: 1.25rem; flex-shrink: 0; margin-top: 1px; }
+.critical-notice p { font-size: .875rem; color: var(--rojo); line-height: 1.6; font-weight: 500; }
+
+.section { margin-bottom: 28px; }
+.section-heading { font-family: 'Syne', sans-serif; font-size: .9375rem; font-weight: 700; color: var(--leaf); text-transform: uppercase; letter-spacing: .06em; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+.section-heading::before { content: ''; width: 16px; height: 2px; background: var(--leaf); border-radius: 2px; }
+.section p { font-size: .9375rem; color: var(--ink-soft); line-height: 1.75; margin-bottom: 8px; }
+.section p:last-child { margin-bottom: 0; }
+.section strong { color: var(--ink); font-weight: 600; }
+
+/* Data list */
+.data-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+.data-item { display: flex; align-items: center; gap: 8px; background: var(--stone); padding: 10px 14px; border-radius: 8px; font-size: .875rem; color: var(--ink-soft); }
+.data-item .icon { font-size: 1rem; flex-shrink: 0; }
+
+/* What happens */
+.process-steps { display: flex; flex-direction: column; gap: 8px; margin: 12px 0; }
+.process-step { display: flex; gap: 12px; align-items: flex-start; }
+.step-dot { width: 24px; height: 24px; background: var(--leaf-xlight); border: 1.5px solid var(--leaf-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: .75rem; font-weight: 700; color: var(--leaf); flex-shrink: 0; margin-top: 1px; }
+.step-text { font-size: .9375rem; color: var(--ink-soft); line-height: 1.6; padding-top: 2px; }
+
+/* No box */
+.no-box { background: var(--leaf-xlight); border: 1px solid rgba(27,107,58,.15); border-radius: 12px; padding: 16px 20px; }
+.no-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+.no-list li { display: flex; align-items: center; gap: 10px; font-size: .9375rem; color: var(--ink-soft); }
+.no-list li::before { content: '✓'; width: 18px; height: 18px; background: var(--leaf); color: #fff; border-radius: 50%; font-size: .65rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+/* Rights */
+.rights-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+.right-item { background: var(--stone); padding: 12px 14px; border-radius: 8px; }
+.right-title { font-size: .8125rem; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.right-desc { font-size: .8125rem; color: var(--ink-soft); line-height: 1.5; }
+
+/* Divider */
+hr { border: none; border-top: 1px solid var(--stone-mid); margin: 32px 0; }
+
+/* Signature section */
+.signature-section { background: var(--stone); border-radius: 16px; padding: 32px; }
+.sig-title { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--ink); margin-bottom: 6px; }
+.sig-sub { font-size: .875rem; color: var(--ink-soft); margin-bottom: 28px; line-height: 1.6; }
+.sig-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.sig-field label { display: block; font-size: .8125rem; font-weight: 600; color: var(--ink-soft); text-transform: uppercase; letter-spacing: .05em; margin-bottom: 6px; }
+.sig-field input[type="text"] {
+  width: 100%; padding: 10px 14px; border: 1.5px solid var(--stone-mid); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: .9375rem; color: var(--ink); background: var(--white); transition: border-color .2s;
+}
+.sig-field input[type="text"]:focus { outline: none; border-color: var(--leaf); }
+.sig-line { border: none; border-bottom: 2px solid var(--ink); padding-bottom: 32px; margin-bottom: 8px; }
+.sig-field-label { font-size: .75rem; color: var(--ink-soft); text-align: center; }
+
+/* Checkbox consent */
+.consent-check { display: flex; gap: 14px; align-items: flex-start; background: var(--white); border: 2px solid var(--stone-mid); border-radius: 12px; padding: 20px; margin: 20px 0; cursor: pointer; transition: border-color .2s; }
+.consent-check:has(input:checked) { border-color: var(--leaf); background: var(--leaf-xlight); }
+.consent-check input[type="checkbox"] { width: 20px; height: 20px; accent-color: var(--leaf); cursor: pointer; flex-shrink: 0; margin-top: 2px; }
+.consent-check label { font-size: .9375rem; color: var(--ink); line-height: 1.65; cursor: pointer; }
+.consent-check label strong { color: var(--ink); font-weight: 600; }
+
+/* Buttons */
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+.btn-sign { display: inline-flex; align-items: center; gap: 8px; background: var(--leaf); color: #fff; padding: 13px 28px; border-radius: 100px; font-weight: 600; font-size: 1rem; border: none; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: background .2s, transform .15s; }
+.btn-sign:hover { background: #2A8A4E; transform: translateY(-1px); }
+.btn-sign:disabled { background: #9ca3af; cursor: not-allowed; transform: none; }
+.btn-print { display: inline-flex; align-items: center; gap: 8px; background: transparent; color: var(--ink); padding: 12px 28px; border-radius: 100px; font-weight: 500; font-size: 1rem; border: 1.5px solid var(--stone-mid); cursor: pointer; font-family: 'DM Sans', sans-serif; transition: border-color .2s; }
+.btn-print:hover { border-color: var(--leaf); color: var(--leaf); }
+
+/* Legal note */
+.legal-note { margin-top: 20px; font-size: .8125rem; color: var(--ink-soft); line-height: 1.7; }
+.legal-note a { color: var(--leaf); text-decoration: underline; text-underline-offset: 2px; }
+
+/* Success state */
+.success-state { display: none; text-align: center; padding: 40px; }
+.success-state.show { display: block; }
+.success-icon { width: 72px; height: 72px; background: var(--leaf-xlight); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; margin: 0 auto 20px; }
+.success-title { font-family: 'Syne', sans-serif; font-size: 1.5rem; font-weight: 800; color: var(--ink); margin-bottom: 10px; }
+.success-sub { color: var(--ink-soft); font-size: 1rem; line-height: 1.7; max-width: 400px; margin: 0 auto 24px; }
+.timestamp-box { background: var(--stone); border-radius: 10px; padding: 14px 20px; font-family: 'DM Mono', monospace; font-size: .8125rem; color: var(--ink-soft); display: inline-block; margin-bottom: 24px; }
+
+/* Print styles */
+@media print {
+  body { background: #fff; padding: 0; }
+  .back-link, .btn-row, .critical-notice, .consent-check, nav { display: none; }
+  .doc-card { box-shadow: none; border: 1px solid #ddd; }
+  .sig-field input[type="text"] { border-color: #999; }
+}
+</style>
+</head>
+<body>
+<div class="page">
+  <a href="index.html" class="back-link">← Volver a identidadlibre.org</a>
+
+  <div class="doc-card">
+    <!-- Header -->
+    <div class="doc-header">
+      <div class="doc-header-top">
+        <div class="doc-logo">IdentidadLibre · Piloto Alpha</div>
+        <span class="doc-badge">Documento I-12</span>
+      </div>
+      <div class="doc-title">Consentimiento Informado</div>
+      <div class="doc-subtitle">Participación en el piloto Alpha del SSI Passport — Identidad Digital Soberana</div>
+      <div class="doc-meta">
+        <div class="doc-meta-item"><strong>Responsable</strong>Johana Niño Abella</div>
+        <div class="doc-meta-item"><strong>Normativa</strong>Ley 1581/2012 · Art. 6</div>
+        <div class="doc-meta-item"><strong>Versión</strong>1.0 · Marzo 2026</div>
+        <div class="doc-meta-item"><strong>Clasificación</strong>Datos sensibles biométricos</div>
+      </div>
+    </div>
+
+    <!-- Body -->
+    <div class="doc-body" id="form-body">
+
+      <div class="critical-notice">
+        <span class="icon">⚠️</span>
+        <p>Este documento debe firmarse antes de comenzar cualquier proceso de verificación de identidad. Sin tu consentimiento explícito, no procesamos ningún dato biométrico.</p>
+      </div>
+
+      <!-- Qué es -->
+      <div class="section">
+        <div class="section-heading">¿Qué es IdentidadLibre?</div>
+        <p>Estoy desarrollando un sistema que te permite tener <strong>tu identidad digital propia</strong>, sin depender de Google, del banco ni del Estado. Es parte de mi tesis de maestría en Blockchain y Finanzas Descentralizadas.</p>
+        <p>El SSI Passport es un <strong>pasaporte de identidad digital soberana</strong> basado en el estándar internacional W3C DID Core 1.0. Una vez que lo tienes, es tuyo y funciona en cualquier plataforma compatible — sin pedirte que lo hagas de nuevo.</p>
+        <p><strong>No hay inversión. No hay tokens financieros. No hay costo.</strong> Este servicio es gratuito para ti.</p>
+      </div>
+
+      <!-- Qué pedimos -->
+      <div class="section">
+        <div class="section-heading">¿Qué te pedimos?</div>
+        <div class="data-grid">
+          <div class="data-item"><span class="icon">🪪</span> Foto cédula (frente)</div>
+          <div class="data-item"><span class="icon">🪪</span> Foto cédula (reverso)</div>
+          <div class="data-item"><span class="icon">🤳</span> Selfie en tiempo real</div>
+          <div class="data-item"><span class="icon">✉️</span> Correo electrónico</div>
+        </div>
+        <p>Nada más. No pedimos contraseñas, documentos adicionales, datos bancarios ni información financiera.</p>
+      </div>
+
+      <!-- Qué hace el sistema -->
+      <div class="section">
+        <div class="section-heading">¿Qué hace el sistema con eso?</div>
+        <div class="process-steps">
+          <div class="process-step">
+            <div class="step-dot">1</div>
+            <div class="step-text">Una inteligencia artificial lee la foto de tu cédula y extrae: nombre completo, número de cédula y fecha de nacimiento.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">2</div>
+            <div class="step-text">El sistema verifica que la selfie corresponde a la foto de la cédula (verificación facial automática).</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">3</div>
+            <div class="step-text"><strong>Las fotos originales se eliminan</strong> de nuestros servidores. No quedan guardadas.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">4</div>
+            <div class="step-text">Se genera tu SSI Passport: un código único de identidad (DID) registrado en una red blockchain pública. Este registro es permanente por diseño de la tecnología blockchain.</div>
+          </div>
+          <div class="process-step">
+            <div class="step-dot">5</div>
+            <div class="step-text">Un agente de inteligencia artificial verifica diariamente que tu identidad sigue vigente (sin que tengas que hacer nada).</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Lo que no hacemos -->
+      <div class="section">
+        <div class="section-heading">Lo que nunca haremos</div>
+        <div class="no-box">
+          <ul class="no-list">
+            <li>Vender tus datos a terceros</li>
+            <li>Guardar las fotos originales de tu cédula o selfie</li>
+            <li>Compartir tu información con anunciantes o empresas de marketing</li>
+            <li>Redirigirte a servicios de inversión o tokenización sin tu consentimiento</li>
+            <li>Procesar datos de personas menores de 18 años</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Riesgo económico -->
+      <div class="section">
+        <div class="section-heading">¿Hay riesgo económico?</div>
+        <p><strong>No. Este servicio es completamente gratuito.</strong> No inviertes dinero. No adquieres compromisos financieros. No hay tokens de inversión involucrados. Tu único compromiso es proporcionar información verídica en el proceso de verificación de identidad.</p>
+      </div>
+
+      <!-- Tus derechos -->
+      <div class="section">
+        <div class="section-heading">Tus derechos (Ley 1581/2012)</div>
+        <div class="rights-grid">
+          <div class="right-item">
+            <div class="right-title">📋 Conocer</div>
+            <div class="right-desc">Tienes derecho a saber qué datos tenemos sobre ti en cualquier momento.</div>
+          </div>
+          <div class="right-item">
+            <div class="right-title">✏️ Actualizar</div>
+            <div class="right-desc">Puedes pedir que corrijamos cualquier dato incorrecto.</div>
+          </div>
+          <div class="right-item">
+            <div class="right-title">🗑️ Eliminar</div>
+            <div class="right-desc">Puedes pedir que eliminemos tu información en cualquier momento. Respondemos en 72 horas.</div>
+          </div>
+          <div class="right-item">
+            <div class="right-title">🚫 Revocar</div>
+            <div class="right-desc">Puedes revocar este consentimiento en cualquier momento sin consecuencias.</div>
+          </div>
+        </div>
+        <p style="margin-top:14px">Para ejercer tus derechos: <strong>johana.nino.abella@gmail.com</strong> con el asunto "Derechos ARCO - IdentidadLibre".</p>
+      </div>
+
+      <!-- Nota blockchain -->
+      <div class="section">
+        <div class="section-heading">Sobre el registro en blockchain</div>
+        <p>Tu código único de identidad (DID) y unas marcas criptográficas de verificación quedan registrados permanentemente en la red blockchain de Polygon. <strong>Esto es una característica de la tecnología, no un defecto.</strong> Es lo que hace que tu identidad sea verdaderamente soberana: nadie puede borrarla ni modificarla.</p>
+        <p>Estos registros en blockchain <strong>no contienen tu nombre, tu cédula ni tus datos biométricos</strong> directamente. Son códigos matemáticos que confirman que verificaste tu identidad, sin revelar cuál es.</p>
+        <p>Al usar la función de "eliminar cuenta", tus datos salen de nuestros sistemas activos, pero los registros en blockchain permanecen (son inmutables por diseño). Esto está informado para cumplir con la transparencia que te debemos.</p>
+      </div>
+
+      <hr>
+
+      <!-- Signature -->
+      <div class="signature-section">
+        <div class="sig-title">Declaración de consentimiento</div>
+        <div class="sig-sub">He leído y entendido toda la información anterior. Doy mi consentimiento voluntario, libre e informado para que IdentidadLibre procese mis datos biométricos con el fin de crear mi SSI Passport.</div>
+
+        <div class="sig-fields">
+          <div class="sig-field">
+            <label>Nombre completo</label>
+            <input type="text" id="sig-nombre" placeholder="Como aparece en la cédula">
+          </div>
+          <div class="sig-field">
+            <label>Número de cédula</label>
+            <input type="text" id="sig-cedula" placeholder="Ej: 1.234.567.890">
+          </div>
+          <div class="sig-field">
+            <label>Correo electrónico</label>
+            <input type="text" id="sig-email" placeholder="correo@ejemplo.com">
+          </div>
+          <div class="sig-field">
+            <label>Ciudad</label>
+            <input type="text" id="sig-ciudad" placeholder="Ciudad de residencia">
+          </div>
+        </div>
+
+        <!-- Firma manuscrita (versión impresa) -->
+        <div class="sig-fields" style="display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:16px" class="print-only">
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-field-label">Firma del participante</div>
+          </div>
+          <div>
+            <div class="sig-line"></div>
+            <div class="sig-field-label">Fecha (DD/MM/AAAA)</div>
+          </div>
+        </div>
+
+        <!-- Checkbox digital -->
+        <div class="consent-check no-print">
+          <input type="checkbox" id="consent-check" onchange="checkConsent()">
+          <label for="consent-check">
+            <strong>Doy mi consentimiento informado.</strong> He leído este documento completo. Entiendo qué hace IdentidadLibre con mis datos, qué no hace, que no hay riesgo económico, y que puedo eliminar mi información en cualquier momento escribiendo a johana.nino.abella@gmail.com. Soy mayor de 18 años y tengo cédula colombiana vigente.
+          </label>
+        </div>
+
+        <div class="btn-row no-print">
+          <button class="btn-sign" id="btn-firmar" disabled onclick="firmarConsentimiento()">
+            ✓ Firmar y continuar
+          </button>
+          <button class="btn-print" onclick="window.print()">
+            🖨️ Versión para imprimir
+          </button>
+        </div>
+
+        <div class="legal-note">
+          Este documento constituye la autorización explícita requerida por el Artículo 6 de la Ley 1581 de 2012 y la Circular Externa 002 de 2015 de la SIC para el tratamiento de datos sensibles de carácter biométrico. Al firmarlo confirmas que tienes 18 años o más. El responsable del tratamiento es Johana Niño Abella — TokenIDS S.A.S. — identidadlibre.org. Ver <a href="privacidad.html">política de privacidad completa</a>.
+        </div>
+      </div>
+
+    </div><!-- /doc-body -->
+
+    <!-- Success state -->
+    <div class="success-state" id="success-state">
+      <div class="success-icon">✓</div>
+      <div class="success-title">Consentimiento registrado</div>
+      <div class="success-sub">Gracias, <span id="success-name"></span>. Tu consentimiento informado ha sido registrado correctamente. En breve recibirás un correo con los próximos pasos del piloto Alpha.</div>
+      <div class="timestamp-box">Timestamp: <span id="timestamp-val"></span></div>
+      <a href="index.html" style="display:inline-flex;align-items:center;gap:8px;background:var(--leaf);color:#fff;padding:13px 28px;border-radius:100px;font-weight:600;font-size:1rem;font-family:'DM Sans',sans-serif">
+        Volver a inicio →
+      </a>
+    </div>
+
+  </div><!-- /doc-card -->
+</div>
+
+<script>
+function checkConsent() {
+  const checked = document.getElementById('consent-check').checked;
+  document.getElementById('btn-firmar').disabled = !checked;
+}
+
+function firmarConsentimiento() {
+  const nombre = document.getElementById('sig-nombre').value.trim();
+  const cedula = document.getElementById('sig-cedula').value.trim();
+  const email = document.getElementById('sig-email').value.trim();
+
+  if(!nombre || !cedula || !email) {
+    alert('Por favor completa al menos nombre, cédula y correo electrónico.');
+    return;
+  }
+
+  const now = new Date();
+  const ts = now.toISOString().replace('T',' ').substring(0,19) + ' UTC';
+
+  // In production: send to backend / API
+  console.log('Consent signed:', { nombre, cedula, email, timestamp: ts });
+
+  document.getElementById('form-body').style.display = 'none';
+  const success = document.getElementById('success-state');
+  success.classList.add('show');
+  document.getElementById('success-name').textContent = nombre;
+  document.getElementById('timestamp-val').textContent = ts;
+}
+</script>
+</body>
+</html>
