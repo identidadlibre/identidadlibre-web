@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Cookies — IdentidadLibre</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0D1F0F;--ink-soft:#4A5E4C;--leaf:#1B6B3A;--leaf-xlight:#EDF7F0;--leaf-light:#D4EDD9;--stone:#F4F2ED;--stone-mid:#E8E5DD;--white:#FAFAF8;--gold:#C4860A;--gold-light:#FFF3D6;--font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;--font-m:'DM Mono',monospace}
+body{font-family:var(--font-b);color:var(--ink);background:var(--stone);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--leaf);text-decoration:underline;text-underline-offset:3px}
+nav{background:rgba(250,250,248,.97);border-bottom:1px solid rgba(13,31,15,.07);padding:14px 0;position:sticky;top:0;z-index:10}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:800px;margin:0 auto;padding:0 24px}
+.nav-logo{font-family:var(--font-d);font-size:1.1rem;font-weight:800;color:var(--leaf);display:flex;align-items:center;gap:7px;text-decoration:none}
+.dot{width:7px;height:7px;background:var(--gold);border-radius:50%}
+.nav-back{font-size:.875rem;color:var(--ink-soft);text-decoration:none}
+.nav-back:hover{color:var(--leaf)}
+.hero{background:var(--ink);color:#fff;padding:48px 0 36px}
+.hero-inner{max-width:800px;margin:0 auto;padding:0 24px}
+.doc-tag{display:inline-flex;align-items:center;background:rgba(27,107,58,.35);border:1px solid rgba(74,222,128,.3);color:#4ade80;padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:500;margin-bottom:16px;font-family:var(--font-m)}
+.hero-title{font-family:var(--font-d);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:10px}
+.hero-sub{color:rgba(255,255,255,.6);font-size:.9375rem;margin-bottom:20px}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:.75rem;color:rgba(255,255,255,.4);font-family:var(--font-m)}
+.main{max-width:800px;margin:0 auto;padding:48px 24px}
+.section{margin-bottom:40px;background:var(--white);border-radius:16px;padding:32px;border:1px solid var(--stone-mid)}
+.section-num{font-family:var(--font-m);font-size:.7rem;color:var(--leaf);background:var(--leaf-xlight);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:10px}
+.section h2{font-family:var(--font-d);font-size:1.25rem;font-weight:800;color:var(--ink);margin-bottom:12px;letter-spacing:-.02em}
+.section p{font-size:.9375rem;color:var(--ink-soft);margin-bottom:10px;line-height:1.75}
+.section strong{color:var(--ink);font-weight:600}
+.cookie-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.cookie-card{border-radius:10px;padding:18px 20px;border:1px solid}
+.cookie-card.essential{background:var(--leaf-xlight);border-color:rgba(27,107,58,.2)}
+.cookie-card.functional{background:var(--gold-light);border-color:rgba(196,134,10,.2)}
+.cookie-card.none{background:#F1F5F9;border-color:#CBD5E1}
+.cookie-card h3{font-family:var(--font-d);font-size:.9375rem;font-weight:700;color:var(--ink);margin-bottom:8px;display:flex;align-items:center;gap:7px}
+.cookie-card p{font-size:.8125rem;color:var(--ink-soft);line-height:1.65}
+.cookie-card ul{list-style:none;padding:0;margin-top:8px;display:flex;flex-direction:column;gap:5px}
+.cookie-card ul li{font-size:.8125rem;color:var(--ink-soft);display:flex;align-items:flex-start;gap:6px;line-height:1.55}
+.badge{display:inline-block;padding:2px 8px;border-radius:100px;font-size:.7rem;font-weight:600}
+.badge.yes{background:rgba(27,107,58,.15);color:var(--leaf)}
+.badge.no{background:rgba(239,68,68,.1);color:#DC2626}
+.banner-preview{background:var(--ink);color:#fff;border-radius:12px;padding:20px 24px;margin-top:14px}
+.banner-preview p{font-size:.875rem;color:rgba(255,255,255,.8);line-height:1.65;margin-bottom:14px}
+.banner-btns{display:flex;gap:10px;flex-wrap:wrap}
+.banner-btn{padding:8px 18px;border-radius:100px;font-size:.8125rem;font-weight:600;border:none;cursor:pointer}
+.banner-btn.accept{background:var(--leaf);color:#fff}
+.banner-btn.config{background:rgba(255,255,255,.1);color:rgba(255,255,255,.8);border:1px solid rgba(255,255,255,.2)}
+footer{background:var(--ink);color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:.8125rem;margin-top:48px}
+footer a{color:rgba(255,255,255,.6)}
+@media(max-width:600px){.cookie-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="dot"></div>IdentidadLibre</a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </div>
+</nav>
+<div class="hero">
+  <div class="hero-inner">
+    <div class="doc-tag">I-07 · Documento operativo</div>
+    <h1 class="hero-title">Política de Cookies y Rastreo</h1>
+    <p class="hero-sub">IdentidadLibre usa cookies mínimas y no te rastrea con fines comerciales.</p>
+    <div class="hero-meta"><span>📅 Versión 1.0 — Marzo 2026</span><span>⚖️ Ley 1581/2012 · ePrivacy UE</span></div>
+  </div>
+</div>
+<div class="main">
+
+  <div class="section">
+    <div class="section-num">Art. 1</div>
+    <h2>Qué son las cookies y por qué importan</h2>
+    <p>Las cookies son pequeños archivos que un sitio web guarda en tu navegador. IdentidadLibre usa cookies únicamente para hacer funcionar el servicio — <strong>no para rastrearte, no para publicidad, no para vender datos.</strong></p>
+    <p>identidadlibre.org es una aplicación React con conexión a blockchain (wagmi/viem). Las "cookies" que usa son principalmente almacenamiento local (localStorage) del navegador para mantener tu sesión activa y la conexión con tu identidad digital.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">Art. 2</div>
+    <h2>Qué cookies usamos</h2>
+    <div class="cookie-grid">
+      <div class="cookie-card essential">
+        <h3>🔒 Cookies esenciales <span class="badge yes">No rechazables</span></h3>
+        <p>Necesarias para el funcionamiento básico. Sin ellas, el servicio no funciona.</p>
+        <ul>
+          <li>• <strong>Sesión de usuario:</strong> JWT de autenticación — duración de la sesión del navegador</li>
+          <li>• <strong>Preferencias de interfaz:</strong> idioma, configuración de pantalla</li>
+          <li>• <strong>Estado CSRF:</strong> seguridad contra ataques de falsificación</li>
+        </ul>
+      </div>
+      <div class="cookie-card functional">
+        <h3>⚙️ Almacenamiento funcional <span class="badge yes">Rechazable</span></h3>
+        <p>Mejoran la experiencia pero no son imprescindibles.</p>
+        <ul>
+          <li>• <strong>Estado de conexión wagmi:</strong> localStorage para recordar tu wallet conectada</li>
+          <li>• <strong>Configuración guardada:</strong> preferencias del dashboard de identidad</li>
+          <li>• <strong>Último acceso:</strong> para mostrar actividad reciente de tu SSI Passport</li>
+        </ul>
+      </div>
+      <div class="cookie-card none" style="grid-column:1/-1">
+        <h3>🚫 Lo que NO usamos <span class="badge no">Nunca</span></h3>
+        <p>IdentidadLibre <strong>no usa</strong> cookies de publicidad, rastreo de comportamiento, redes sociales, Google Analytics ni ningún sistema de análisis de terceros. No hay píxeles de seguimiento. No hay retargeting. No hay perfilamiento comercial.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">Art. 3</div>
+    <h2>Cómo gestionar o eliminar las cookies</h2>
+    <p>Puedes gestionar las cookies desde la configuración de tu navegador:</p>
+    <p><strong>Chrome:</strong> Ajustes → Privacidad y seguridad → Cookies y otros datos de sitios<br>
+    <strong>Firefox:</strong> Preferencias → Privacidad y seguridad → Cookies y datos del sitio<br>
+    <strong>Safari:</strong> Preferencias → Privacidad → Gestionar datos del sitio web<br>
+    <strong>Edge:</strong> Configuración → Privacidad, búsqueda y servicios → Cookies</p>
+    <p>Si eliminas las cookies esenciales, tendrás que iniciar sesión de nuevo en IdentidadLibre.</p>
+  </div>
+
+  <div class="section">
+    <div class="section-num">Art. 4</div>
+    <h2>Banner de consentimiento — texto oficial</h2>
+    <p>Este es el texto del banner que aparece al visitar identidadlibre.org por primera vez:</p>
+    <div class="banner-preview">
+      <p>🍪 Usamos cookies mínimas para que el servicio funcione. No te rastreamos ni usamos publicidad. Puedes configurar tus preferencias o aceptar las esenciales.</p>
+      <div class="banner-btns">
+        <button class="banner-btn accept">Aceptar esenciales</button>
+        <button class="banner-btn config">Configurar preferencias</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-num">Art. 5</div>
+    <h2>Contacto</h2>
+    <p>Para preguntas sobre esta política: <a href="mailto:johana.nino.abella@gmail.com">johana.nino.abella@gmail.com</a> — Asunto: "Cookies — IdentidadLibre".</p>
+    <p>Esta política aplica exclusivamente a identidadlibre.org. Normativa: Ley 1581/2012 (Colombia) y Directiva ePrivacy de la UE (referencia para usuarios europeos).</p>
+  </div>
+
+</div>
+<footer>
+  <p>© 2026 IdentidadLibre · TokenIDS S.A.S. · Johana Niño Abella · Colombia<br>
+  <a href="index.html">Inicio</a> · <a href="privacidad.html">Privacidad</a> · <a href="terminos.html">Términos</a> · <a href="consentimiento.html">Consentimiento</a></p>
+</footer>
+</body>
+</html>

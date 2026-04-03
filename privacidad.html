@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de Privacidad — IdentidadLibre</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0D1F0F;--ink-soft:#4A5E4C;--leaf:#1B6B3A;--leaf-xlight:#EDF7F0;--leaf-light:#D4EDD9;--stone:#F4F2ED;--stone-mid:#E8E5DD;--white:#FAFAF8;--gold:#C4860A;--gold-light:#FFF3D6;--font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;--font-m:'DM Mono',monospace}
+body{font-family:var(--font-b);color:var(--ink);background:var(--stone);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--leaf);text-decoration:underline;text-underline-offset:3px}
+nav{background:rgba(250,250,248,.97);border-bottom:1px solid rgba(13,31,15,.07);padding:14px 0;position:sticky;top:0;z-index:10}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:0 24px}
+.nav-logo{font-family:var(--font-d);font-size:1.1rem;font-weight:800;color:var(--leaf);display:flex;align-items:center;gap:7px;text-decoration:none}
+.dot{width:7px;height:7px;background:var(--gold);border-radius:50%}
+.nav-back{font-size:.875rem;color:var(--ink-soft);text-decoration:none;display:flex;align-items:center;gap:5px}
+.nav-back:hover{color:var(--leaf)}
+.hero{background:var(--ink);color:#fff;padding:56px 0 40px}
+.hero-inner{max-width:900px;margin:0 auto;padding:0 24px}
+.doc-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(27,107,58,.35);border:1px solid rgba(74,222,128,.3);color:#4ade80;padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:500;margin-bottom:18px;font-family:var(--font-m)}
+.hero-title{font-family:var(--font-d);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}
+.hero-sub{color:rgba(255,255,255,.6);font-size:1rem;margin-bottom:24px;max-width:580px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:.8rem;color:rgba(255,255,255,.4);font-family:var(--font-m)}
+.hero-meta span{display:flex;align-items:center;gap:5px}
+.main{max-width:900px;margin:0 auto;padding:48px 24px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start}
+.toc{position:sticky;top:80px}
+.toc-title{font-family:var(--font-d);font-size:.75rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.toc ul{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc ul li a{font-size:.8125rem;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:6px;display:block;border-left:2px solid transparent;transition:all .2s;line-height:1.4}
+.toc ul li a:hover,.toc ul li a.active{color:var(--leaf);background:var(--leaf-xlight);border-left-color:var(--leaf)}
+.content{min-width:0}
+.section{margin-bottom:48px}
+.section-num{font-family:var(--font-m);font-size:.7rem;color:var(--leaf);background:var(--leaf-xlight);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:10px}
+.section h2{font-family:var(--font-d);font-size:1.375rem;font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:-.02em;scroll-margin-top:100px}
+.section p{font-size:.9375rem;color:var(--ink-soft);margin-bottom:12px;line-height:1.75}
+.section p:last-child{margin-bottom:0}
+.section strong{color:var(--ink);font-weight:600}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.875rem}
+.data-table th{background:var(--ink);color:#fff;padding:10px 14px;text-align:left;font-weight:600;font-size:.8125rem}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--stone-mid);color:var(--ink-soft);vertical-align:top;line-height:1.6}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:var(--stone)}
+.highlight-box{border-radius:12px;padding:20px 24px;margin:16px 0}
+.highlight-box.green{background:var(--leaf-xlight);border:1px solid rgba(27,107,58,.15)}
+.highlight-box.gold{background:var(--gold-light);border:1px solid rgba(196,134,10,.2)}
+.highlight-box.warning{background:#FEF3C7;border:1px solid rgba(245,158,11,.3)}
+.highlight-box h4{font-family:var(--font-d);font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.highlight-box p,.highlight-box li{font-size:.875rem;color:var(--ink-soft);line-height:1.7}
+.highlight-box ul{list-style:none;display:flex;flex-direction:column;gap:6px;padding:0}
+.highlight-box ul li::before{content:'✓ ';color:var(--leaf);font-weight:700}
+.right-list ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.right-list ul li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:var(--ink-soft)}
+.right-list ul li::before{content:'→';color:var(--leaf);font-weight:700;flex-shrink:0;margin-top:1px}
+.contact-box{background:var(--white);border:1px solid var(--stone-mid);border-radius:12px;padding:24px;display:flex;gap:16px;align-items:flex-start;margin:16px 0}
+.contact-icon{font-size:1.5rem;flex-shrink:0}
+.contact-box h4{font-family:var(--font-d);font-size:.9375rem;font-weight:700;color:var(--ink);margin-bottom:6px}
+.contact-box p{font-size:.875rem;color:var(--ink-soft);line-height:1.6}
+.contact-box a{color:var(--leaf)}
+.divider{border:none;border-top:1px solid var(--stone-mid);margin:40px 0}
+footer{background:var(--ink);color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:.8125rem;margin-top:64px}
+footer a{color:rgba(255,255,255,.6)}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.toc{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="dot"></div>IdentidadLibre</a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="doc-tag">I-05 · Documento regulatorio</div>
+    <h1 class="hero-title">Política de Privacidad y<br>Tratamiento de Datos Personales</h1>
+    <p class="hero-sub">Cómo recopilamos, usamos y protegemos tus datos en IdentidadLibre. Sin letra pequeña.</p>
+    <div class="hero-meta">
+      <span>📅 Versión 1.0 — Marzo 2026</span>
+      <span>⚖️ Ley 1581/2012 · GDPR Art. 9 y 17</span>
+      <span>🏢 TokenIDS S.A.S. · Colombia</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="layout">
+    <aside class="toc">
+      <div class="toc-title">Contenido</div>
+      <ul>
+        <li><a href="#responsable">1. Responsable del tratamiento</a></li>
+        <li><a href="#datos">2. Datos que recopilamos</a></li>
+        <li><a href="#sensibles">3. Datos biométricos sensibles</a></li>
+        <li><a href="#finalidad">4. Para qué usamos tus datos</a></li>
+        <li><a href="#blockchain">5. Datos en blockchain</a></li>
+        <li><a href="#terceros">6. Procesadores externos</a></li>
+        <li><a href="#novendemos">7. Lo que nunca haremos</a></li>
+        <li><a href="#derechos">8. Tus derechos ARCO</a></li>
+        <li><a href="#menores">9. Menores de edad</a></li>
+        <li><a href="#europa">10. Usuarios europeos</a></li>
+        <li><a href="#retencion">11. Retención de datos</a></li>
+        <li><a href="#contacto">12. Contacto y quejas</a></li>
+      </ul>
+    </aside>
+
+    <div class="content">
+
+      <div class="highlight-box green">
+        <h4>Resumen en 30 segundos</h4>
+        <ul>
+          <li>Procesamos tu cédula y selfie para verificar tu identidad — luego las eliminamos</li>
+          <li>No vendemos, no compartimos, no usamos tus datos para publicidad</li>
+          <li>Tu DID y hash criptográficos van en blockchain pública — son anónimos</li>
+          <li>Puedes eliminar todo en cualquier momento escribiéndonos</li>
+          <li>Cumplimos Ley 1581/2012 (Colombia) y GDPR (usuarios europeos)</li>
+        </ul>
+      </div>
+
+      <div class="section" id="responsable">
+        <div class="section-num">Art. 1</div>
+        <h2>Responsable del tratamiento</h2>
+        <p>El responsable del tratamiento de datos personales en el marco de IdentidadLibre es:</p>
+        <table class="data-table">
+          <tr><th>Campo</th><th>Información</th></tr>
+          <tr><td><strong>Nombre</strong></td><td>Johana Niño Abella — TokenIDS S.A.S.</td></tr>
+          <tr><td><strong>Domicilio</strong></td><td>Bogotá D.C., Colombia</td></tr>
+          <tr><td><strong>Correo electrónico</strong></td><td>johana.nino.abella@gmail.com</td></tr>
+          <tr><td><strong>Sitio web</strong></td><td>identidadlibre.org</td></tr>
+          <tr><td><strong>Naturaleza jurídica</strong></td><td>Investigación académica (TFM de maestría) bajo TokenIDS S.A.S.</td></tr>
+        </table>
+        <p>IdentidadLibre es el Servicio 1 del ecosistema TokenIDS, completamente independiente del Servicio 2 (tokenización inmobiliaria). Esta política aplica exclusivamente al Servicio 1.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="datos">
+        <div class="section-num">Art. 2</div>
+        <h2>Datos personales que recopilamos</h2>
+        <p>Recopilamos únicamente los datos estrictamente necesarios para el proceso de verificación de identidad:</p>
+        <table class="data-table">
+          <tr><th>Dato</th><th>Tipo</th><th>Cómo se obtiene</th><th>Se almacena permanentemente</th></tr>
+          <tr><td>Foto cédula (frente)</td><td>Biométrico — imagen</td><td>Carga manual por el usuario</td><td><strong>No</strong> — se elimina tras procesamiento</td></tr>
+          <tr><td>Foto cédula (reverso)</td><td>Biométrico — imagen</td><td>Carga manual por el usuario</td><td><strong>No</strong> — se elimina tras procesamiento</td></tr>
+          <tr><td>Selfie en tiempo real</td><td>Biométrico — imagen</td><td>Cámara del dispositivo</td><td><strong>No</strong> — se elimina tras procesamiento</td></tr>
+          <tr><td>Nombre completo</td><td>Identificativo</td><td>Extraído de la cédula por IA</td><td>Sí — en sistemas de IdentidadLibre</td></tr>
+          <tr><td>Número de cédula</td><td>Identificativo</td><td>Extraído de la cédula por IA</td><td>Sí — en sistemas de IdentidadLibre</td></tr>
+          <tr><td>Fecha de nacimiento</td><td>Identificativo</td><td>Extraído de la cédula por IA</td><td>Sí — en sistemas de IdentidadLibre</td></tr>
+          <tr><td>Correo electrónico</td><td>Contacto</td><td>Formulario de registro</td><td>Sí — para comunicaciones del servicio</td></tr>
+          <tr><td>Wallet address (DID)</td><td>Técnico — seudónimo</td><td>Generada automáticamente</td><td>Sí — en blockchain (inmutable)</td></tr>
+          <tr><td>Hash ZKP edad</td><td>Técnico — criptográfico</td><td>Generado automáticamente</td><td>Sí — en blockchain (inmutable)</td></tr>
+          <tr><td>Hash ZKP KYC</td><td>Técnico — criptográfico</td><td>Generado automáticamente</td><td>Sí — en blockchain (inmutable)</td></tr>
+        </table>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="sensibles">
+        <div class="section-num">Art. 3</div>
+        <h2>Tratamiento especial de datos biométricos</h2>
+        <p>Los datos biométricos (fotos de cédula y selfie) son clasificados como <strong>datos sensibles</strong> bajo el Art. 5 de la Ley 1581/2012 y la Circular Externa 002/2015 de la SIC. Su tratamiento requiere y tiene autorización explícita mediante el <a href="consentimiento.html">Consentimiento Informado I-12</a>.</p>
+        <div class="highlight-box gold">
+          <h4>¿Qué pasa exactamente con tus fotos?</h4>
+          <p>Las imágenes de tu cédula y tu selfie son enviadas a la API de OpenAI (GPT-4o Vision) para extracción de datos y verificación facial. <strong>Este procesamiento ocurre en los servidores de OpenAI</strong>, no en los nuestros. Una vez completada la verificación (proceso de segundos), las imágenes no son almacenadas por IdentidadLibre. OpenAI procesa las imágenes bajo sus propias políticas de privacidad, disponibles en openai.com/privacy.</p>
+        </div>
+        <p>La base legal para el tratamiento de datos biométricos es el consentimiento explícito e informado del titular, conforme al Art. 6 de la Ley 1581/2012 y el Art. 9 del GDPR para usuarios en territorio europeo.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="finalidad">
+        <div class="section-num">Art. 4</div>
+        <h2>Finalidades del tratamiento</h2>
+        <p>Los datos personales recopilados se usan exclusivamente para las siguientes finalidades:</p>
+        <table class="data-table">
+          <tr><th>Finalidad</th><th>Base legal</th></tr>
+          <tr><td>Verificar la identidad del titular mediante cédula colombiana y selfie</td><td>Consentimiento informado — Art. 6 Ley 1581/2012</td></tr>
+          <tr><td>Generar el DID W3C (identificador digital soberano) del titular</td><td>Consentimiento informado — ejecución del servicio</td></tr>
+          <tr><td>Emitir la Verifiable Credential de KYC</td><td>Consentimiento informado — ejecución del servicio</td></tr>
+          <tr><td>Registrar los hash ZKP en blockchain para verificación externa</td><td>Consentimiento informado — naturaleza del protocolo</td></tr>
+          <tr><td>Monitoreo continuo de vigencia del KYC (Perpetual KYC diario)</td><td>Consentimiento informado — interés legítimo del servicio</td></tr>
+          <tr><td>Cumplimiento de obligaciones legales (SAGRILAFT, OFAC/UIAF)</td><td>Obligación legal — Ley 1762/2015</td></tr>
+          <tr><td>Comunicaciones sobre el estado de tu SSI Passport</td><td>Consentimiento informado — ejecución del servicio</td></tr>
+        </table>
+        <p><strong>Ningún dato será utilizado para fines de marketing, publicidad, perfilamiento comercial, o para ofrecer productos o servicios de inversión o tokenización.</strong></p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="blockchain">
+        <div class="section-num">Art. 5</div>
+        <h2>Datos registrados en blockchain</h2>
+        <p>Por la naturaleza del protocolo de identidad soberana (W3C DID Core 1.0), los siguientes datos se registran en la blockchain de Polygon y son <strong>permanentes e inmutables</strong>:</p>
+        <div class="highlight-box warning">
+          <h4>⚠ Carácter inmutable del blockchain — léelo con atención</h4>
+          <p>Tu DID (identificador digital soberano) y los hash criptográficos de tus verificaciones quedan registrados permanentemente en la blockchain de Polygon. <strong>Esta es una característica estructural de la tecnología blockchain, no un defecto.</strong> Es lo que garantiza que tu identidad digital es verdaderamente soberana: ninguna entidad central puede modificarla.</p>
+          <p style="margin-top:8px">Cuando solicites la eliminación de tu cuenta, tus datos salen de los sistemas activos de IdentidadLibre, pero los registros en blockchain permanecen. Estos registros <strong>no contienen tu nombre, tu número de cédula ni ningún dato biométrico</strong> — son hashes criptográficos que confirman que una verificación ocurrió, sin revelar quién eres.</p>
+        </div>
+        <p>Contratos en Polygon Amoy Testnet que almacenan datos públicos:</p>
+        <table class="data-table">
+          <tr><th>Contrato</th><th>Dirección</th><th>Qué almacena</th></tr>
+          <tr><td>TokenIDSDIDRegistry</td><td style="font-family:var(--font-m);font-size:.75rem">0x4356aecd4aa898f3f83dd3674d0cf70753e50568</td><td>Tu DID (wallet address anónima)</td></tr>
+          <tr><td>AgeVerifier (ZKP)</td><td style="font-family:var(--font-m);font-size:.75rem">0x744ec2d0aafd3be5dcd3ba79da71192a78dc6284</td><td>Hash de prueba de mayoría de edad</td></tr>
+          <tr><td>KYCVerifier (ZKP)</td><td style="font-family:var(--font-m);font-size:.75rem">0x74e7b7e4be2b3943037d34adb3015bb50772228e</td><td>Hash de verificación KYC completa</td></tr>
+        </table>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="terceros">
+        <div class="section-num">Art. 6</div>
+        <h2>Procesadores externos de datos</h2>
+        <table class="data-table">
+          <tr><th>Proveedor</th><th>Datos compartidos</th><th>Finalidad</th><th>País</th></tr>
+          <tr><td><strong>OpenAI</strong> (GPT-4o Vision)</td><td>Fotos de cédula y selfie (temporalmente)</td><td>Extracción de datos y verificación facial</td><td>EE.UU.</td></tr>
+          <tr><td><strong>OpenSanctions</strong></td><td>Nombre completo y número de cédula</td><td>Screening OFAC/UIAF contra listas de sanciones</td><td>Alemania</td></tr>
+          <tr><td><strong>Polygon (blockchain)</strong></td><td>DID y hash ZKP</td><td>Registro inmutable — no hay control por parte de IdentidadLibre</td><td>Descentralizado</td></tr>
+        </table>
+        <p>Para transferencias internacionales de datos a OpenAI (EE.UU.), IdentidadLibre aplica las salvaguardias del Art. 26 de la Ley 1581/2012 y las Cláusulas Contractuales Estándar requeridas bajo GDPR para usuarios europeos.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="novendemos">
+        <div class="section-num">Art. 7</div>
+        <h2>Lo que nunca haremos con tus datos</h2>
+        <div class="highlight-box green">
+          <ul>
+            <li>Vender tus datos personales a terceros bajo ninguna circunstancia</li>
+            <li>Compartir tu información con empresas de marketing o publicidad</li>
+            <li>Usar tus datos para publicidad dirigida o perfilamiento comercial</li>
+            <li>Guardar las fotos originales de tu cédula o selfie en nuestros servidores</li>
+            <li>Redirigirte hacia servicios de inversión o tokenización sin consentimiento explícito separado</li>
+            <li>Transferir tu identidad a otra empresa sin notificarte y obtener tu autorización</li>
+            <li>Usar tus datos para entrenar modelos de inteligencia artificial propios</li>
+          </ul>
+        </div>
+        <p>Esta política de cero uso comercial de los datos es pública y versionada en <a href="https://github.com/identidadlibre/identidadlibre-web/blob/main/POLICY.md" target="_blank">nuestro repositorio de GitHub</a> como POLICY.md.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="derechos">
+        <div class="section-num">Art. 8</div>
+        <h2>Tus derechos ARCO (Ley 1581/2012)</h2>
+        <div class="right-list">
+          <ul>
+            <li><strong>Acceso:</strong> Tienes derecho a conocer qué datos personales tenemos sobre ti en cualquier momento.</li>
+            <li><strong>Rectificación:</strong> Tienes derecho a solicitar la corrección de datos inexactos o incompletos.</li>
+            <li><strong>Cancelación / Supresión:</strong> Tienes derecho a solicitar la eliminación de tus datos cuando ya no sean necesarios. Atendemos en un máximo de 72 horas hábiles para los datos en nuestros sistemas activos.</li>
+            <li><strong>Oposición:</strong> Tienes derecho a oponerte al tratamiento de tus datos en cualquier momento, incluso cuando el tratamiento sea legítimo.</li>
+            <li><strong>Revocación del consentimiento:</strong> Puedes revocar el consentimiento otorgado en cualquier momento. La revocación no afecta la licitud del tratamiento anterior.</li>
+            <li><strong>Portabilidad:</strong> Tienes derecho a recibir tus datos en formato estructurado y legible por máquina. Tu DID puede exportarse directamente desde la blockchain.</li>
+          </ul>
+        </div>
+        <p style="margin-top:16px">Para ejercer cualquiera de estos derechos, escribe a <a href="mailto:johana.nino.abella@gmail.com">johana.nino.abella@gmail.com</a> con el asunto <strong>"Derechos ARCO — IdentidadLibre"</strong>. Respondemos en un máximo de 10 días hábiles.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="menores">
+        <div class="section-num">Art. 9</div>
+        <h2>Menores de edad</h2>
+        <p>IdentidadLibre <strong>no procesa datos de personas menores de 18 años</strong>. El proceso de verificación incluye una prueba criptográfica de mayoría de edad (AgeVerifier.sol con ZKP Groth16) que impide técnicamente el registro de menores.</p>
+        <p>Si en algún caso excepcional datos de un menor llegan a nuestros sistemas, serán eliminados de inmediato al detectarse. Si eres padre, madre o tutor y tienes conocimiento de que un menor ha enviado datos a IdentidadLibre, contáctanos de inmediato en johana.nino.abella@gmail.com.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="europa">
+        <div class="section-num">Art. 10</div>
+        <h2>Usuarios en territorio europeo (GDPR)</h2>
+        <p>Para usuarios ubicados en la Unión Europea o el Espacio Económico Europeo, aplican adicionalmente los siguientes derechos bajo el Reglamento (UE) 2016/679 (GDPR):</p>
+        <table class="data-table">
+          <tr><th>Derecho GDPR</th><th>Artículo</th><th>Aplicación en IdentidadLibre</th></tr>
+          <tr><td>Derecho al olvido</td><td>Art. 17</td><td>Eliminación de datos en sistemas activos en 72h. Los hash en blockchain son técnicamente inmutables.</td></tr>
+          <tr><td>Protección de datos biométricos</td><td>Art. 9</td><td>Base legal: consentimiento explícito. Implementado en I-12.</td></tr>
+          <tr><td>Portabilidad de datos</td><td>Art. 20</td><td>DID exportable directamente desde blockchain.</td></tr>
+          <tr><td>Limitación del tratamiento</td><td>Art. 18</td><td>Puedes solicitar la suspensión del tratamiento mientras se resuelve una reclamación.</td></tr>
+          <tr><td>Reclamación ante autoridad de control</td><td>Art. 77</td><td>Puedes reclamar ante la autoridad de protección de datos de tu país de residencia.</td></tr>
+        </table>
+        <p>El tratamiento de datos de usuarios europeos se basa en el consentimiento explícito (Art. 6.1.a GDPR) y, para datos biométricos, en el Art. 9.2.a GDPR.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="retencion">
+        <div class="section-num">Art. 11</div>
+        <h2>Períodos de retención de datos</h2>
+        <table class="data-table">
+          <tr><th>Dato</th><th>Período de retención</th><th>Razón</th></tr>
+          <tr><td>Fotos de cédula y selfie</td><td>Eliminación inmediata tras verificación</td><td>No hay razón para conservarlas</td></tr>
+          <tr><td>Nombre, cédula, fecha nacimiento</td><td>Vigencia de la cuenta + 5 años</td><td>Obligación SAGRILAFT (Ley 1762/2015)</td></tr>
+          <tr><td>Correo electrónico</td><td>Vigencia de la cuenta</td><td>Comunicaciones del servicio</td></tr>
+          <tr><td>DID y hash ZKP (blockchain)</td><td>Permanente — inmutable por diseño</td><td>Naturaleza de la tecnología blockchain</td></tr>
+          <tr><td>Logs de verificación</td><td>5 años</td><td>Cumplimiento SAGRILAFT y trazabilidad</td></tr>
+        </table>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="contacto">
+        <div class="section-num">Art. 12</div>
+        <h2>Contacto, quejas y autoridad de control</h2>
+        <div class="contact-box">
+          <div class="contact-icon">✉️</div>
+          <div>
+            <h4>Canal principal de contacto</h4>
+            <p>Para ejercer derechos ARCO, formular preguntas sobre esta política o reportar cualquier incidente de privacidad:<br>
+            <a href="mailto:johana.nino.abella@gmail.com">johana.nino.abella@gmail.com</a><br>
+            Asunto: "Privacidad — IdentidadLibre" · Respuesta en máximo 10 días hábiles.</p>
+          </div>
+        </div>
+        <div class="contact-box">
+          <div class="contact-icon">🏛️</div>
+          <div>
+            <h4>Autoridad de control — Colombia</h4>
+            <p>Si no estás satisfecho con nuestra respuesta, puedes presentar una queja ante la <strong>Superintendencia de Industria y Comercio (SIC)</strong>:<br>
+            <a href="https://www.sic.gov.co" target="_blank">www.sic.gov.co</a> · Teléfono: (601) 592-0400</p>
+          </div>
+        </div>
+        <p style="margin-top:16px;font-size:.875rem;color:var(--ink-soft)">Esta política puede actualizarse. Los cambios sustanciales se notificarán por correo electrónico con al menos 15 días de anticipación. La versión vigente siempre estará disponible en <a href="https://identidadlibre.org/privacidad.html">identidadlibre.org/privacidad.html</a>.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 IdentidadLibre · TokenIDS S.A.S. · Johana Niño Abella · Colombia<br>
+  <a href="index.html">Inicio</a> · <a href="terminos.html">Términos</a> · <a href="cookies.html">Cookies</a> · <a href="consentimiento.html">Consentimiento</a></p>
+</footer>
+
+<script>
+const links = document.querySelectorAll('.toc a');
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if(e.isIntersecting) {
+      links.forEach(l => l.classList.remove('active'));
+      const active = document.querySelector(`.toc a[href="#${e.target.id}"]`);
+      if(active) active.classList.add('active');
+    }
+  });
+}, {threshold:0.3, rootMargin:'-80px 0px -60% 0px'});
+document.querySelectorAll('.section[id]').forEach(s => observer.observe(s));
+</script>
+</body>
+</html>
