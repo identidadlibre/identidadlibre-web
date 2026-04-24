@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Términos y Condiciones — IdentidadLibre</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0D1F0F;--ink-soft:#4A5E4C;--leaf:#1B6B3A;--leaf-xlight:#EDF7F0;--leaf-light:#D4EDD9;--stone:#F4F2ED;--stone-mid:#E8E5DD;--white:#FAFAF8;--gold:#C4860A;--gold-light:#FFF3D6;--font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;--font-m:'DM Mono',monospace}
+body{font-family:var(--font-b);color:var(--ink);background:var(--stone);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--leaf);text-decoration:underline;text-underline-offset:3px}
+nav{background:rgba(250,250,248,.97);border-bottom:1px solid rgba(13,31,15,.07);padding:14px 0;position:sticky;top:0;z-index:10}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:0 24px}
+.nav-logo{font-family:var(--font-d);font-size:1.1rem;font-weight:800;color:var(--leaf);display:flex;align-items:center;gap:7px;text-decoration:none}
+.dot{width:7px;height:7px;background:var(--gold);border-radius:50%}
+.nav-back{font-size:.875rem;color:var(--ink-soft);text-decoration:none}
+.nav-back:hover{color:var(--leaf)}
+.hero{background:var(--ink);color:#fff;padding:56px 0 40px}
+.hero-inner{max-width:900px;margin:0 auto;padding:0 24px}
+.doc-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(27,107,58,.35);border:1px solid rgba(74,222,128,.3);color:#4ade80;padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:500;margin-bottom:18px;font-family:var(--font-m)}
+.hero-title{font-family:var(--font-d);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}
+.hero-sub{color:rgba(255,255,255,.6);font-size:1rem;margin-bottom:24px;max-width:580px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:.8rem;color:rgba(255,255,255,.4);font-family:var(--font-m)}
+.main{max-width:900px;margin:0 auto;padding:48px 24px}
+.layout{display:grid;grid-template-columns:220px 1fr;gap:48px;align-items:start}
+.toc{position:sticky;top:80px}
+.toc-title{font-family:var(--font-d);font-size:.75rem;font-weight:700;color:var(--ink-soft);text-transform:uppercase;letter-spacing:.08em;margin-bottom:14px}
+.toc ul{list-style:none;display:flex;flex-direction:column;gap:2px}
+.toc ul li a{font-size:.8125rem;color:var(--ink-soft);text-decoration:none;padding:5px 10px;border-radius:6px;display:block;border-left:2px solid transparent;transition:all .2s}
+.toc ul li a:hover,.toc ul li a.active{color:var(--leaf);background:var(--leaf-xlight);border-left-color:var(--leaf)}
+.content{min-width:0}
+.section{margin-bottom:48px}
+.section-num{font-family:var(--font-m);font-size:.7rem;color:var(--leaf);background:var(--leaf-xlight);padding:2px 8px;border-radius:4px;display:inline-block;margin-bottom:10px}
+.section h2{font-family:var(--font-d);font-size:1.375rem;font-weight:800;color:var(--ink);margin-bottom:14px;letter-spacing:-.02em;scroll-margin-top:100px}
+.section p{font-size:.9375rem;color:var(--ink-soft);margin-bottom:12px;line-height:1.75}
+.section strong{color:var(--ink);font-weight:600}
+.highlight-box{border-radius:12px;padding:20px 24px;margin:16px 0}
+.highlight-box.green{background:var(--leaf-xlight);border:1px solid rgba(27,107,58,.15)}
+.highlight-box.gold{background:var(--gold-light);border:1px solid rgba(196,134,10,.2)}
+.highlight-box.warning{background:#FEF3C7;border:1px solid rgba(245,158,11,.3)}
+.highlight-box.red{background:#FEF2F2;border:1px solid rgba(239,68,68,.2)}
+.highlight-box h4{font-family:var(--font-d);font-size:.9rem;font-weight:700;margin-bottom:8px;color:var(--ink)}
+.highlight-box p,.highlight-box li{font-size:.875rem;color:var(--ink-soft);line-height:1.7}
+.highlight-box ul{list-style:none;padding:0;display:flex;flex-direction:column;gap:6px}
+.highlight-box ul li::before{content:'• ';color:var(--leaf);font-weight:700}
+.data-table{width:100%;border-collapse:collapse;margin:16px 0;font-size:.875rem}
+.data-table th{background:var(--ink);color:#fff;padding:10px 14px;text-align:left;font-weight:600;font-size:.8125rem}
+.data-table td{padding:10px 14px;border-bottom:1px solid var(--stone-mid);color:var(--ink-soft);vertical-align:top;line-height:1.6}
+.data-table tr:last-child td{border-bottom:none}
+.data-table tr:nth-child(even) td{background:var(--stone)}
+.divider{border:none;border-top:1px solid var(--stone-mid);margin:40px 0}
+footer{background:var(--ink);color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:.8125rem;margin-top:64px}
+footer a{color:rgba(255,255,255,.6)}
+@media(max-width:720px){.layout{grid-template-columns:1fr}.toc{display:none}}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="dot"></div>IdentidadLibre</a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="doc-tag">I-09 · Documento operativo</div>
+    <h1 class="hero-title">Términos y Condiciones<br>del SSI Passport</h1>
+    <p class="hero-sub">Las reglas del servicio. En lenguaje claro, sin jerga legal innecesaria. El SSI Passport es tuyo — estos términos protegen ese principio.</p>
+    <div class="hero-meta">
+      <span>📅 Versión 1.0 — Marzo 2026</span>
+      <span>⚖️ Ley 1480/2011 · Ley 1581/2012</span>
+      <span>🏢 TokenIDS S.A.S. · Colombia</span>
+    </div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="layout">
+    <aside class="toc">
+      <div class="toc-title">Contenido</div>
+      <ul>
+        <li><a href="#objeto">1. Qué es este servicio</a></li>
+        <li><a href="#naturaleza">2. Naturaleza del SSI Passport</a></li>
+        <li><a href="#gratuidad">3. Gratuidad del servicio</a></li>
+        <li><a href="#requisitos">4. Requisitos para participar</a></li>
+        <li><a href="#blockchain-t">5. Blockchain e inmutabilidad</a></li>
+        <li><a href="#portabilidad">6. Portabilidad</a></li>
+        <li><a href="#obligaciones">7. Obligaciones del usuario</a></li>
+        <li><a href="#limitacion">8. Limitación de responsabilidad</a></li>
+        <li><a href="#suspension">9. Suspensión y cancelación</a></li>
+        <li><a href="#derechos-t">10. Derechos del usuario</a></li>
+        <li><a href="#modificaciones">11. Cambios a estos T&amp;C</a></li>
+        <li><a href="#jurisdiccion">12. Jurisdicción y ley aplicable</a></li>
+      </ul>
+    </aside>
+
+    <div class="content">
+
+      <div class="highlight-box green">
+        <h4>Lo esencial en 4 puntos</h4>
+        <ul>
+          <li>El SSI Passport es gratuito para el ciudadano colombiano, ahora y siempre</li>
+          <li>Es tuyo: basado en estándar W3C DID, funciona aunque IdentidadLibre deje de existir</li>
+          <li>No garantizamos que terceros lo acepten — eso depende de sus propias políticas</li>
+          <li>Puedes eliminar tu cuenta en cualquier momento</li>
+        </ul>
+      </div>
+
+      <div class="section" id="objeto">
+        <div class="section-num">Cláusula 1</div>
+        <h2>Qué es este servicio</h2>
+        <p>IdentidadLibre provee el <strong>SSI Passport</strong> (Pasaporte de Identidad Digital Soberana): un servicio de verificación de identidad basado en los estándares internacionales W3C DID Core 1.0 y W3C VC Data Model 2.0, que permite al ciudadano colombiano obtener un identificador digital único (DID), portátil y bajo su control.</p>
+        <p>IdentidadLibre es el <strong>Servicio 1</strong> del ecosistema TokenIDS, desarrollado por Johana Niño Abella como Trabajo de Fin de Máster en Blockchain y Finanzas Descentralizadas. Es completamente independiente del Servicio 2 (tokenización inmobiliaria). El uso de IdentidadLibre no implica ni conlleva ninguna relación con servicios de inversión.</p>
+        <p>El prestador del servicio es <strong>Johana Niño Abella — TokenIDS S.A.S.</strong>, con domicilio en Bogotá D.C., Colombia.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="naturaleza">
+        <div class="section-num">Cláusula 2</div>
+        <h2>Naturaleza técnica del SSI Passport</h2>
+        <p>El SSI Passport es un <strong>instrumento técnico de verificación de identidad</strong>. No es un documento de identificación oficial ni reemplaza la cédula de ciudadanía colombiana. Contiene:</p>
+        <table class="data-table">
+          <tr><th>Componente</th><th>Descripción</th></tr>
+          <tr><td>DID (Identificador Descentralizado)</td><td>Formato: did:pkh:eip155:80002:{wallet_address} — identificador único y portátil</td></tr>
+          <tr><td>Hash ZKP de edad</td><td>Prueba criptográfica de mayoría de edad sin revelar la fecha exacta de nacimiento</td></tr>
+          <tr><td>Hash ZKP de KYC</td><td>Confirmación criptográfica de que el proceso KYC fue completado satisfactoriamente</td></tr>
+          <tr><td>Nivel de aseguramiento (LoA)</td><td>Alto: cédula + selfie + ZKP on-chain + screening OFAC/UIAF</td></tr>
+          <tr><td>Fecha de emisión</td><td>Timestamp del momento de verificación</td></tr>
+        </table>
+        <p><strong>El SSI Passport no contiene:</strong> nombre completo, número de cédula, selfie, fotos biométricas ni ningún dato personal directamente identificable.</p>
+        <div class="highlight-box gold">
+          <h4>Sobre la aceptación por terceros</h4>
+          <p>IdentidadLibre no garantiza que el SSI Passport sea aceptado por plataformas específicas (bancos, fintechs, servicios públicos). Cada verificador decide si acepta el DID de acuerdo con su propio marco de confianza y regulación aplicable. IdentidadLibre no puede ser responsable de la decisión de terceros de no aceptar el SSI Passport.</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="gratuidad">
+        <div class="section-num">Cláusula 3</div>
+        <h2>Gratuidad del servicio</h2>
+        <p>El SSI Passport es <strong>completamente gratuito</strong> para el ciudadano colombiano. No existe ningún costo de registro, emisión, renovación ni portabilidad del SSI Passport.</p>
+        <p>El modelo de negocio de IdentidadLibre es B2B: las empresas (fintechs, bancos, apps) que usen la API de verificación pagan por ese acceso. El ciudadano nunca paga.</p>
+        <p>Si en el futuro se introducen cobros para el ciudadano, se notificará con al menos <strong>30 días de anticipación</strong> por correo electrónico, y el usuario podrá exportar o eliminar su identidad antes de que aplique cualquier cambio.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="requisitos">
+        <div class="section-num">Cláusula 4</div>
+        <h2>Requisitos para participar</h2>
+        <p>Para obtener el SSI Passport, el usuario debe cumplir los siguientes requisitos:</p>
+        <div class="highlight-box green">
+          <ul>
+            <li>Ser mayor de 18 años (verificado mediante ZKP AgeVerifier)</li>
+            <li>Ser titular de una cédula de ciudadanía colombiana vigente</li>
+            <li>Proporcionar información veraz y no manipulada</li>
+            <li>Haber suscrito el Consentimiento Informado (I-12) antes del proceso de verificación</li>
+            <li>No estar incluido en listas de sanciones OFAC/UIAF (verificado mediante screening automático)</li>
+          </ul>
+        </div>
+        <p>IdentidadLibre se reserva el derecho de rechazar solicitudes que no cumplan estos requisitos o que presenten indicios de fraude documental, en cuyo caso el usuario puede solicitar revisión manual del caso.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="blockchain-t">
+        <div class="section-num">Cláusula 5</div>
+        <h2>Blockchain e inmutabilidad — aviso importante</h2>
+        <div class="highlight-box warning">
+          <h4>⚠ Esto debes entender antes de continuar</h4>
+          <p>Al obtener tu SSI Passport, tu DID (identificador digital anónimo) y los hash criptográficos de tus verificaciones se registran en la blockchain de Polygon. <strong>Estos registros son permanentes e inmutables por diseño del protocolo blockchain.</strong></p>
+          <p style="margin-top:8px">Cuando solicites la eliminación de tu cuenta, IdentidadLibre eliminará tus datos de sus sistemas activos, pero <strong>los registros en blockchain no pueden eliminarse</strong>. Estos registros no contienen datos personales directamente identificables (no contienen tu nombre, cédula ni datos biométricos).</p>
+          <p style="margin-top:8px">Al aceptar estos términos confirmas que entiendes y aceptas esta característica técnica de la tecnología blockchain.</p>
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="portabilidad">
+        <div class="section-num">Cláusula 6</div>
+        <h2>Portabilidad y soberanía del SSI Passport</h2>
+        <p>La característica central del SSI Passport es su <strong>portabilidad soberana</strong>: el DID del usuario puede ser verificado por cualquier plataforma compatible con el estándar W3C DID Core 1.0 directamente en la blockchain, sin necesidad de contactar a IdentidadLibre.</p>
+        <p>Esto significa que incluso si IdentidadLibre deja de operar, el SSI Passport del usuario permanece válido y verificable en la blockchain de Polygon. <strong>Tu identidad digital no depende de que nosotros sigamos existiendo.</strong></p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="obligaciones">
+        <div class="section-num">Cláusula 7</div>
+        <h2>Obligaciones del usuario</h2>
+        <p>Al usar IdentidadLibre, el usuario se compromete a:</p>
+        <table class="data-table">
+          <tr><th>Obligación</th><th>Consecuencia del incumplimiento</th></tr>
+          <tr><td>Proporcionar únicamente su propia cédula y su propia selfie</td><td>Suspensión inmediata de la cuenta y posible reporte a autoridades</td></tr>
+          <tr><td>No usar imágenes manipuladas, alteradas o de terceros</td><td>Rechazo del proceso y posible acción legal</td></tr>
+          <tr><td>Mantener la confidencialidad de las credenciales de acceso a su cuenta</td><td>IdentidadLibre no es responsable de accesos no autorizados por negligencia del usuario</td></tr>
+          <tr><td>Notificar de inmediato cualquier uso no autorizado de su cuenta</td><td>johana.nino.abella@gmail.com</td></tr>
+          <tr><td>Usar el SSI Passport únicamente para fines de identificación legítimos</td><td>Terminación del servicio</td></tr>
+        </table>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="limitacion">
+        <div class="section-num">Cláusula 8</div>
+        <h2>Limitación de responsabilidad</h2>
+        <p>IdentidadLibre no será responsable en los siguientes casos:</p>
+        <div class="highlight-box red">
+          <ul>
+            <li>Rechazo del SSI Passport por parte de plataformas de terceros</li>
+            <li>Interrupciones del servicio por mantenimiento, fuerza mayor o problemas de la red blockchain</li>
+            <li>Pérdida de acceso al SSI Passport por pérdida de credenciales de la cuenta del usuario</li>
+            <li>Daños derivados del uso del SSI Passport para fines distintos a la verificación de identidad</li>
+            <li>Cambios en el protocolo blockchain de Polygon que afecten la disponibilidad del servicio</li>
+          </ul>
+        </div>
+        <p>Durante la fase de piloto Alpha, el servicio se ofrece <strong>"tal como está"</strong> (as-is), sin garantías de disponibilidad permanente. IdentidadLibre se compromete a notificar interrupciones planificadas con al menos 48 horas de anticipación.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="suspension">
+        <div class="section-num">Cláusula 9</div>
+        <h2>Suspensión y cancelación del servicio</h2>
+        <p><strong>El usuario puede cancelar su SSI Passport en cualquier momento</strong> usando la función de eliminación de cuenta en la plataforma o enviando una solicitud a johana.nino.abella@gmail.com. La cancelación no tiene costo ni penalización.</p>
+        <p>IdentidadLibre puede suspender o cancelar el servicio de un usuario en los siguientes casos: detección de fraude documental, inclusión en listas de sanciones OFAC/UIAF, incumplimiento de estos términos, o requerimiento de autoridad competente. En casos no urgentes, se notificará al usuario antes de la suspensión.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="derechos-t">
+        <div class="section-num">Cláusula 10</div>
+        <h2>Derechos del usuario bajo el Estatuto del Consumidor</h2>
+        <p>Bajo la Ley 1480/2011 (Estatuto del Consumidor de Colombia), el usuario tiene derecho a:</p>
+        <div class="highlight-box green">
+          <ul>
+            <li>Información clara, veraz y suficiente sobre el servicio antes de su uso</li>
+            <li>Protección contra prácticas comerciales abusivas</li>
+            <li>Presentar quejas y reclamaciones ante IdentidadLibre o la SIC</li>
+            <li>Recibir respuesta a sus solicitudes en plazos razonables (máximo 15 días hábiles)</li>
+          </ul>
+        </div>
+        <p>Para ejercer derechos como consumidor: johana.nino.abella@gmail.com. Para escalada ante autoridad: Superintendencia de Industria y Comercio — <a href="https://www.sic.gov.co" target="_blank">www.sic.gov.co</a>.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="modificaciones">
+        <div class="section-num">Cláusula 11</div>
+        <h2>Cambios a estos Términos y Condiciones</h2>
+        <p>IdentidadLibre puede modificar estos términos. Los cambios se notificarán al usuario por correo electrónico con al menos <strong>15 días de anticipación</strong> para cambios menores y <strong>30 días</strong> para cambios sustanciales.</p>
+        <p>Si el usuario no acepta los nuevos términos, puede cancelar su cuenta antes de la fecha de vigencia de los cambios sin penalización. La versión vigente siempre estará en <a href="https://identidadlibre.org/terminos.html">identidadlibre.org/terminos.html</a>.</p>
+      </div>
+
+      <hr class="divider">
+
+      <div class="section" id="jurisdiccion">
+        <div class="section-num">Cláusula 12</div>
+        <h2>Jurisdicción y ley aplicable</h2>
+        <p>Estos términos se rigen por la legislación colombiana, en particular:</p>
+        <table class="data-table">
+          <tr><th>Norma</th><th>Aplicación</th></tr>
+          <tr><td>Ley 1581/2012</td><td>Protección de datos personales y datos biométricos</td></tr>
+          <tr><td>Ley 1480/2011</td><td>Estatuto del Consumidor — derechos del usuario</td></tr>
+          <tr><td>Código de Comercio colombiano</td><td>Relaciones comerciales y prestación de servicios</td></tr>
+          <tr><td>W3C DID Core 1.0</td><td>Estándar técnico del SSI Passport (referencia, no norma legal)</td></tr>
+        </table>
+        <p>Para asuntos de protección al consumidor y privacidad, el tribunal competente es la <strong>Superintendencia de Industria y Comercio (SIC)</strong> de Colombia.</p>
+        <p>Para usuarios en la Unión Europea, se respetan adicionalmente los derechos reconocidos por el GDPR, que complementan y no reemplazan las protecciones colombianas.</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 IdentidadLibre · TokenIDS S.A.S. · Johana Niño Abella · Colombia<br>
+  <a href="index.html">Inicio</a> · <a href="privacidad.html">Privacidad</a> · <a href="cookies.html">Cookies</a> · <a href="consentimiento.html">Consentimiento</a></p>
+</footer>
+</body>
+</html>

@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Preguntas Frecuentes — IdentidadLibre</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--ink:#0D1F0F;--ink-soft:#4A5E4C;--leaf:#1B6B3A;--leaf-xlight:#EDF7F0;--leaf-light:#D4EDD9;--stone:#F4F2ED;--stone-mid:#E8E5DD;--white:#FAFAF8;--gold:#C4860A;--gold-light:#FFF3D6;--font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif;--font-m:'DM Mono',monospace}
+body{font-family:var(--font-b);color:var(--ink);background:var(--stone);line-height:1.7;-webkit-font-smoothing:antialiased}
+a{color:var(--leaf);text-decoration:underline;text-underline-offset:3px}
+nav{background:rgba(250,250,248,.97);border-bottom:1px solid rgba(13,31,15,.07);padding:14px 0;position:sticky;top:0;z-index:10}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;max-width:900px;margin:0 auto;padding:0 24px}
+.nav-logo{font-family:var(--font-d);font-size:1.1rem;font-weight:800;color:var(--leaf);display:flex;align-items:center;gap:7px;text-decoration:none}
+.dot{width:7px;height:7px;background:var(--gold);border-radius:50%}
+.nav-back{font-size:.875rem;color:var(--ink-soft);text-decoration:none}
+.nav-back:hover{color:var(--leaf)}
+.hero{background:var(--ink);color:#fff;padding:56px 0 40px}
+.hero-inner{max-width:900px;margin:0 auto;padding:0 24px}
+.doc-tag{display:inline-flex;align-items:center;background:rgba(27,107,58,.35);border:1px solid rgba(74,222,128,.3);color:#4ade80;padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:500;margin-bottom:16px;font-family:var(--font-m)}
+.hero-title{font-family:var(--font-d);font-size:clamp(1.8rem,3.5vw,2.6rem);font-weight:800;line-height:1.1;letter-spacing:-.03em;margin-bottom:12px}
+.hero-sub{color:rgba(255,255,255,.6);font-size:1rem;margin-bottom:24px;max-width:560px}
+.hero-meta{display:flex;gap:20px;flex-wrap:wrap;font-size:.8rem;color:rgba(255,255,255,.4);font-family:var(--font-m)}
+.main{max-width:900px;margin:0 auto;padding:48px 24px}
+.cats{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+.cat-btn{padding:8px 18px;border-radius:100px;font-size:.875rem;font-weight:500;border:1.5px solid var(--stone-mid);background:var(--white);color:var(--ink-soft);cursor:pointer;transition:all .2s}
+.cat-btn:hover,.cat-btn.active{background:var(--leaf);color:#fff;border-color:var(--leaf)}
+.cat-section{margin-bottom:48px}
+.cat-title{font-family:var(--font-d);font-size:.8125rem;font-weight:700;color:var(--leaf);text-transform:uppercase;letter-spacing:.1em;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.cat-title::before{content:'';width:20px;height:2px;background:var(--leaf);border-radius:2px}
+.faq-item{background:var(--white);border-radius:12px;border:1px solid var(--stone-mid);margin-bottom:8px;overflow:hidden;transition:border-color .2s}
+.faq-item:hover{border-color:rgba(27,107,58,.2)}
+.faq-item.open{border-color:rgba(27,107,58,.3)}
+.faq-q{padding:18px 22px;font-weight:600;font-size:.9375rem;color:var(--ink);cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:12px;transition:background .2s}
+.faq-q:hover{background:var(--leaf-xlight)}
+.faq-item.open .faq-q{background:var(--leaf-xlight)}
+.faq-num{font-family:var(--font-m);font-size:.7rem;color:var(--leaf);background:var(--leaf-xlight);padding:2px 7px;border-radius:4px;flex-shrink:0;min-width:32px;text-align:center}
+.faq-item.open .faq-num{background:var(--leaf);color:#fff}
+.faq-toggle{width:24px;height:24px;flex-shrink:0;background:var(--stone-mid);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.875rem;transition:background .2s,transform .3s;font-weight:500}
+.faq-item.open .faq-toggle{background:var(--leaf);color:#fff;transform:rotate(45deg)}
+.faq-a{padding:0 22px;max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s ease}
+.faq-item.open .faq-a{max-height:600px;padding:0 22px 20px}
+.faq-a p{font-size:.9375rem;color:var(--ink-soft);line-height:1.75;margin-bottom:10px}
+.faq-a p:last-child{margin-bottom:0}
+.faq-a .analogy{background:var(--stone);border-left:3px solid var(--leaf);padding:12px 16px;border-radius:0 8px 8px 0;margin:10px 0;font-size:.875rem;color:var(--ink-soft);font-style:italic}
+.faq-a strong{color:var(--ink);font-weight:600}
+.faq-a a{color:var(--leaf)}
+.search-box{display:flex;align-items:center;gap:10px;background:var(--white);border:1px solid var(--stone-mid);border-radius:100px;padding:10px 20px;margin-bottom:28px}
+.search-box input{flex:1;border:none;outline:none;font-family:var(--font-b);font-size:.9375rem;color:var(--ink);background:transparent}
+.search-box input::placeholder{color:var(--ink-soft)}
+.no-results{text-align:center;padding:40px;color:var(--ink-soft);display:none}
+footer{background:var(--ink);color:rgba(255,255,255,.4);text-align:center;padding:32px 24px;font-size:.8125rem;margin-top:64px}
+footer a{color:rgba(255,255,255,.6)}
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-inner">
+    <a href="index.html" class="nav-logo"><div class="dot"></div>IdentidadLibre</a>
+    <a href="index.html" class="nav-back">← Volver al inicio</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="doc-tag">I-13 · 20 preguntas frecuentes</div>
+    <h1 class="hero-title">Todo lo que necesitas saber<br>sobre tu identidad soberana</h1>
+    <p class="hero-sub">Respuestas directas, sin tecnicismos. Si tienes una pregunta que no está aquí, escríbenos.</p>
+    <div class="hero-meta"><span>📅 Actualizado Marzo 2026</span><span>✉️ johana.nino.abella@gmail.com</span></div>
+  </div>
+</div>
+
+<div class="main">
+  <div class="search-box">
+    <span>🔍</span>
+    <input type="text" id="search" placeholder="Busca tu pregunta..." oninput="filterFAQ(this.value)">
+  </div>
+
+  <div class="cats">
+    <button class="cat-btn active" onclick="filterCat('all',this)">Todas</button>
+    <button class="cat-btn" onclick="filterCat('seguridad',this)">Seguridad y datos</button>
+    <button class="cat-btn" onclick="filterCat('uso',this)">Uso del servicio</button>
+    <button class="cat-btn" onclick="filterCat('tecnico',this)">Técnico</button>
+    <button class="cat-btn" onclick="filterCat('legal',this)">Legal</button>
+  </div>
+
+  <div class="no-results" id="no-results">No se encontraron preguntas con ese término. Escríbenos a johana.nino.abella@gmail.com</div>
+
+  <!-- SEGURIDAD Y DATOS -->
+  <div class="cat-section" data-cat="seguridad">
+    <div class="cat-title">Seguridad y datos personales</div>
+
+    <div class="faq-item" data-q="¿Es seguro subir una foto de mi cédula?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">01</span> &nbsp;¿Es seguro subir una foto de mi cédula?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Sí. Las fotos de tu cédula son enviadas directamente a la API de OpenAI (GPT-4o Vision) para extraer los datos visibles (nombre, número de cédula, fecha de nacimiento). <strong>Las fotos no se almacenan en nuestros servidores.</strong> Una vez completada la extracción, que toma segundos, no quedan copias.</p>
+        <p>El proceso cumple la Ley 1581/2012 y la Circular Externa 002/2015 de la SIC sobre tratamiento de datos biométricos sensibles. Antes de subir cualquier foto, firmaste el Consentimiento Informado que explica exactamente qué pasa.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Van a vender mis datos?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">02</span> &nbsp;¿Van a vender mis datos?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p><strong>No, nunca.</strong> Los ingresos de IdentidadLibre vienen de empresas (fintechs, bancos) que pagan por usar la API de verificación de identidad. El ciudadano no paga y tampoco es el producto.</p>
+        <p>Esta promesa es pública y versionada en <a href="https://github.com/identidadlibre" target="_blank">nuestro repositorio de GitHub</a> como POLICY.md. Es un compromiso formal, no solo una declaración de intenciones.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Las fotos de mi cédula quedan guardadas en algún servidor?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">03</span> &nbsp;¿Las fotos de mi cédula quedan guardadas?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p><strong>No.</strong> Las imágenes originales de tu cédula y tu selfie se procesan por IA y se eliminan. Lo único que guardamos son los datos extraídos: nombre, número de cédula y fecha de nacimiento — más tu correo electrónico y tu identificador digital (DID).</p>
+        <p>Nunca guardamos fotos originales en ningún servidor de IdentidadLibre. OpenAI tampoco las guarda para sus propios fines de entrenamiento cuando se usan vía API empresarial, según sus políticas de privacidad.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Qué información mía queda en internet para siempre?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">04</span> &nbsp;¿Qué queda "en internet" para siempre?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Dos cosas quedan registradas permanentemente en la blockchain de Polygon: tu <strong>DID</strong> (un código único anónimo, como "did:pkh:eip155:80002:0x7a3f...") y los <strong>hash criptográficos</strong> de tus verificaciones de edad y KYC.</p>
+        <p><strong>Lo que no está ahí:</strong> tu nombre, tu número de cédula, tus fotos, tu email. Los registros blockchain son anónimos — nadie puede identificarte a partir de ellos sin conocer también tu wallet personal.</p>
+        <div class="analogy">💡 Es como si en una hemeroteca quedara registrado que "alguien pasó un examen" sin decir quién fue esa persona ni cuál era su nota exacta.</div>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Es seguro usar IdentidadLibre?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">05</span> &nbsp;¿Es seguro usar IdentidadLibre? ¿Qué lo certifica?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>La seguridad de IdentidadLibre tiene tres capas: (1) <strong>Código abierto</strong> — cualquiera puede auditar el código en github.com/identidadlibre; (2) <strong>Contratos en blockchain</strong> — las reglas de procesamiento de tu identidad están en contratos públicos en Polygon que nadie puede modificar retroactivamente; (3) <strong>ZKP criptográfico</strong> — la prueba de mayoría de edad usa criptografía Groth16, el mismo estándar que usan sistemas de privacidad de nivel bancario.</p>
+        <p>Es un proyecto académico (TFM de maestría), no una empresa con certificaciones ISO. Pero el código es verificable y los contratos son auditables — eso vale más que un sello en un PDF.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- USO DEL SERVICIO -->
+  <div class="cat-section" data-cat="uso">
+    <div class="cat-title">Uso del servicio</div>
+
+    <div class="faq-item" data-q="¿Para qué sirve el SSI Passport en la vida real?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">06</span> &nbsp;¿Para qué sirve el SSI Passport en la vida real?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Tu SSI Passport funciona en cualquier plataforma que adopte el estándar W3C DID. Casos concretos: onboarding en fintechs (sin repetir el proceso de KYC), acceso a servicios públicos digitales, verificación de edad en plataformas, cualquier servicio que quiera saber que eres una persona real y mayor de edad.</p>
+        <p><strong>La clave es la portabilidad:</strong> lo haces una vez y lo usas en múltiples lugares sin volver a subir tu cédula. Hoy lo hace cada plataforma por separado a un costo de $8-15 USD por persona. IdentidadLibre lo hace por $0.12 USD y una sola vez.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Tiene costo? ¿Habrá cobros en el futuro?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">07</span> &nbsp;¿Tiene costo? ¿Habrá cobros en el futuro?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>El SSI Passport es <strong>completamente gratuito</strong> para el ciudadano colombiano, ahora y siempre. El modelo de negocio es B2B: las empresas pagan, no tú.</p>
+        <p>Si eso cambiara en el futuro, te avisaríamos con al menos <strong>30 días de anticipación</strong> por correo electrónico, y tendrías la opción de exportar o eliminar tu identidad antes de que aplique cualquier cambio. Esto está en los <a href="terminos.html">Términos y Condiciones</a>.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Puedo usarlo si vivo fuera de Colombia?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">08</span> &nbsp;¿Puedo usarlo si vivo fuera de Colombia?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Sí. IdentidadLibre funciona para cualquier ciudadano colombiano, independientemente de dónde viva. La verificación se basa en la cédula de ciudadanía colombiana — si la tienes, puedes obtener tu SSI Passport desde cualquier país.</p>
+        <p>Para colombianos en España, Estados Unidos u otros países europeos, aplican también los derechos del GDPR (Art. 17 — derecho al olvido, Art. 9 — datos biométricos).</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Qué pasa si quiero eliminar mi identidad?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">09</span> &nbsp;¿Qué pasa si quiero eliminar mi identidad?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Puedes solicitar la eliminación en cualquier momento enviando un correo a <a href="mailto:johana.nino.abella@gmail.com">johana.nino.abella@gmail.com</a> con el asunto "Eliminar mi cuenta IdentidadLibre". Respondemos y ejecutamos en máximo 72 horas hábiles.</p>
+        <p><strong>Qué se elimina:</strong> tus datos en los sistemas activos de IdentidadLibre (nombre, cédula, email, configuración de cuenta).<br>
+        <strong>Qué no se puede eliminar:</strong> los registros en blockchain (DID y hash ZKP) son inmutables por diseño técnico — pero no contienen tus datos personales identificables.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Qué pasa si pierdo acceso a mi cuenta?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">10</span> &nbsp;¿Qué pasa si pierdo acceso a mi cuenta?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Escríbenos a johana.nino.abella@gmail.com con el asunto "Recuperación de cuenta". Verificaremos tu identidad mediante tu número de cédula y te ayudaremos a recuperar el acceso.</p>
+        <p>Si perdiste la clave privada de tu wallet (el identificador técnico de tu DID), en el piloto Alpha el proceso de recuperación es manual y requiere reverificación completa de tu identidad.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿En qué otras plataformas puedo usar mi SSI Passport?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">11</span> &nbsp;¿En qué otras plataformas puedo usar mi SSI Passport?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>En cualquier plataforma que adopte el estándar W3C DID Core 1.0. Actualmente el ecosistema está en crecimiento — durante el piloto Alpha, IdentidadLibre es la plataforma de referencia.</p>
+        <p>La portabilidad real viene de que tu DID está en blockchain: cualquier desarrollador puede consultar directamente los contratos en Polygon para verificar tu identidad sin necesidad de contactarnos. Eso hace que el SSI Passport funcione aunque IdentidadLibre deje de existir.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Qué pasa si mi cédula está vencida o dañada?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">12</span> &nbsp;¿Qué pasa si mi cédula está vencida o dañada?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Las cédulas colombianas no vencen — son vigentes de por vida. Si está dañada y los datos no son legibles, el sistema de IA puede tener dificultades para extraer la información correctamente. En ese caso, el caso pasa a revisión manual.</p>
+        <p>Si el sistema rechaza tu cédula, escríbenos y revisamos manualmente. El objetivo es que puedas obtener tu SSI Passport, no excluirte del proceso por problemas técnicos menores.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Cuánto tiempo tarda el proceso?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">13</span> &nbsp;¿Cuánto tiempo tarda el proceso de verificación?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Menos de 10 minutos en la mayoría de los casos. El proceso tiene estos tiempos aproximados: subir las fotos de la cédula (1 min) → verificación IA automática (2-3 min) → selfie y comparación facial (1 min) → emisión del SSI Passport (2-3 min para registro en blockchain).</p>
+        <p>Más del 70% de los casos se aprueban automáticamente en este tiempo. Los casos que requieren revisión manual pueden tardar hasta 24 horas.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TÉCNICO -->
+  <div class="cat-section" data-cat="tecnico">
+    <div class="cat-title">Preguntas técnicas</div>
+
+    <div class="faq-item" data-q="¿Qué es la identidad digital soberana?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">14</span> &nbsp;¿Qué es la identidad digital soberana?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>La identidad digital soberana (SSI — Self-Sovereign Identity) es un modelo de identidad digital donde <strong>tú controlas tus propios datos</strong>, sin depender de una empresa central (Google, Facebook, tu banco) que los almacene y gestione por ti.</p>
+        <div class="analogy">💡 Hoy tu identidad digital la controlan Google (tu email), tu banco (tu historial financiero) y el Estado (tu cédula digital). Con SSI, tienes un identificador propio que funciona en todos lados sin que ninguno de ellos sea el intermediario.</div>
+        <p>La tecnología que lo hace posible son los <strong>DIDs</strong> (Identificadores Descentralizados), un estándar internacional del W3C publicado en 2022, y las <strong>Verifiable Credentials</strong> (credenciales verificables firmadas digitalmente).</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Cómo se verifica mi mayoría de edad sin revelar mi fecha de nacimiento?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">15</span> &nbsp;¿Cómo verifican que soy mayor de 18 sin saber cuántos años tengo?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Con una tecnología llamada <strong>Prueba de Conocimiento Cero</strong> (Zero-Knowledge Proof — ZKP). Es una demostración matemática que prueba que una afirmación es verdadera sin revelar los datos que la respaldan.</p>
+        <div class="analogy">💡 Es como si alguien te preguntara si puedes levantar 50 kilos y tú lo demostraras levantándolos frente a ellos — sin necesidad de decirles cuánto pesas exactamente. Saben que puedes, sin saber tu peso.</div>
+        <p>En IdentidadLibre: el sistema sabe tu fecha de nacimiento (extraída de la cédula), calcula si eres mayor de 18, y genera una prueba matemática de esa conclusión. Lo que queda en blockchain es <strong>la prueba</strong>, no la fecha. Matemáticamente imposible de revertir para obtener el dato original.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Qué es una blockchain? ¿Qué es Polygon?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">16</span> &nbsp;¿Qué es una blockchain? ¿Qué es Polygon?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Una <strong>blockchain</strong> es un registro digital compartido entre miles de computadores en todo el mundo. Nadie lo controla — todos lo verifican. Una vez que algo se escribe ahí, no se puede borrar ni modificar. Es como un libro de contabilidad que todo el mundo puede leer pero nadie puede alterar.</p>
+        <div class="analogy">💡 Es como si en lugar de guardar un documento en el servidor de una empresa (que podría modificarlo), lo grabaras en miles de computadores al mismo tiempo. Para falsificarlo tendrías que hacerlo en todos simultáneamente — imposible en la práctica.</div>
+        <p><strong>Polygon</strong> es una red blockchain específica, compatible con Ethereum, conocida por su bajo costo de transacciones y velocidad. Es donde están desplegados los contratos de IdentidadLibre. Puedes verificar todo en <a href="https://amoy.polygonscan.com" target="_blank">amoy.polygonscan.com</a>.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Necesito saber de tecnología o blockchain para usarlo?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">17</span> &nbsp;¿Necesito saber de tecnología o blockchain para usarlo?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p><strong>No.</strong> El proceso es: subes tu cédula → te tomas una selfie → en menos de 10 minutos recibes tu SSI Passport. La blockchain opera en el fondo como infraestructura invisible.</p>
+        <div class="analogy">💡 No necesitas entender TCP/IP para usar internet. No necesitas entender cómo funciona el motor para manejar un carro. Igual aquí: la tecnología es la infraestructura; tú solo interactúas con la interfaz.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LEGAL -->
+  <div class="cat-section" data-cat="legal">
+    <div class="cat-title">Legal y normativa</div>
+
+    <div class="faq-item" data-q="¿Es legal en Colombia?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">18</span> &nbsp;¿Es legal en Colombia?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Sí. IdentidadLibre opera bajo el marco legal colombiano vigente: <strong>Ley 1581/2012</strong> (protección de datos personales), <strong>Circular 002/2015 SIC</strong> (datos biométricos sensibles), <strong>Ley 1480/2011</strong> (Estatuto del Consumidor), y los estándares técnicos <strong>W3C DID Core 1.0</strong> y <strong>W3C VC Data Model 2.0</strong>.</p>
+        <p>Colombia no tiene legislación específica que prohíba los sistemas de identidad descentralizada. La SFC (Superintendencia Financiera) tiene un sandbox regulatorio para servicios financieros digitales innovadores — IdentidadLibre es compatible con ese marco.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Hay diferencia entre la cédula digital del gobierno y el SSI Passport?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">19</span> &nbsp;¿Es lo mismo que la cédula digital del gobierno?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p><strong>No, son cosas diferentes.</strong> La cédula digital del gobierno colombiano es un documento oficial emitido por la Registraduría — es una versión digital de la cédula física, controlada y centralizada por el Estado.</p>
+        <p>El SSI Passport de IdentidadLibre es una credencial digital soberana: no la controla ni el Estado ni ninguna empresa. Está registrada en una blockchain descentralizada y puedes usarla en plataformas privadas (fintechs, apps) que adopten el estándar W3C DID. Son complementarios, no equivalentes.</p>
+      </div>
+    </div>
+
+    <div class="faq-item" data-q="¿Cómo contacto a IdentidadLibre si tengo un problema?">
+      <div class="faq-q" onclick="toggle(this)">
+        <span><span class="faq-num">20</span> &nbsp;¿Cómo contacto a IdentidadLibre si tengo un problema?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">
+        <p>Canal principal: <a href="mailto:johana.nino.abella@gmail.com">johana.nino.abella@gmail.com</a></p>
+        <p>Tiempo de respuesta: máximo 2 días hábiles para consultas generales, 72 horas para solicitudes de eliminación de datos, 10 días hábiles para ejercer derechos ARCO formales.</p>
+        <p>Si no recibes respuesta o no estás satisfecho con ella, puedes escalar a la <strong>Superintendencia de Industria y Comercio (SIC)</strong>: <a href="https://www.sic.gov.co" target="_blank">www.sic.gov.co</a>.</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>© 2026 IdentidadLibre · TokenIDS S.A.S. · Johana Niño Abella · Colombia<br>
+  <a href="index.html">Inicio</a> · <a href="privacidad.html">Privacidad</a> · <a href="terminos.html">Términos</a> · <a href="consentimiento.html">Consentimiento</a></p>
+</footer>
+
+<script>
+function toggle(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+  if (!isOpen) item.classList.add('open');
+}
+
+function filterCat(cat, btn) {
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cat-section').forEach(s => {
+    s.style.display = (cat === 'all' || s.dataset.cat === cat) ? 'block' : 'none';
+  });
+  document.querySelectorAll('.faq-item').forEach(i => i.style.display = '');
+  document.getElementById('no-results').style.display = 'none';
+}
+
+function filterFAQ(val) {
+  const q = val.toLowerCase().trim();
+  let found = 0;
+  document.querySelectorAll('.cat-section').forEach(s => s.style.display = 'block');
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.faq-item').forEach(item => {
+    const text = (item.dataset.q + ' ' + item.querySelector('.faq-a').textContent).toLowerCase();
+    const show = !q || text.includes(q);
+    item.style.display = show ? '' : 'none';
+    if (show) found++;
+  });
+  document.getElementById('no-results').style.display = (q && found === 0) ? 'block' : 'none';
+  if (!q) {
+    document.querySelector('.cat-btn').classList.add('active');
+  }
+}
+</script>
+</body>
+</html>
