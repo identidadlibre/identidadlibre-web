@@ -17,7 +17,7 @@ export default function Layout() {
       </header>
       <main className="flex-1"><Outlet /></main>
       <footer className="border-t border-gray-100 px-6 py-4 text-center text-xs text-gray-400">
-        <p>identidadlibre.org — Identidad soberana para Colombia</p>
+        <p>identidadlibre.org — Identidad Digital Soberana para Colombia</p>
         <div className="flex justify-center gap-4 mt-1">
           <a href="/terminos.html">Términos</a>
           <a href="/privacidad.html">Privacidad</a>
