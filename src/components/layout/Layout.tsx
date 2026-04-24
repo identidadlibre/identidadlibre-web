@@ -1,4 +1,5 @@
 import { Outlet, Link } from 'react-router-dom'
+import { ConnectWallet } from '../ui/ConnectWallet'
 
 export default function Layout() {
   return (
@@ -7,10 +8,11 @@ export default function Layout() {
         <Link to="/" className="text-xl font-bold text-gray-900">
           identidadlibre<span className="text-emerald-500">.org</span>
         </Link>
-        <nav className="flex gap-6 text-sm text-gray-600">
+        <nav className="flex items-center gap-6 text-sm text-gray-600">
           <Link to="/">Inicio</Link>
           <Link to="/kyc">Obtener pasaporte</Link>
           <Link to="/dashboard">Mi identidad</Link>
+          <ConnectWallet />
         </nav>
       </header>
       <main className="flex-1"><Outlet /></main>
