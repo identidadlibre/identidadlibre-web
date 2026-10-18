@@ -1,4 +1,9 @@
-// src/pages/KYCFlow.tsx — v2 Sprint 3 / Bloque H
+// src/pages/KYCFlow.tsx — v3 (tarea 1.5)
+// Cambios vs v2:
+//   - Llama al proxy /api/kyc/* (sin VITE_AGENTS_URL ni secreto en el navegador)
+//   - Despierta el servicio al abrir el flujo, con aviso visible
+//   - Comprime las imágenes en el navegador; botón deshabilitado tras enviar
+//   - Resultado de revisión manual con mensaje propio
 // Cambios vs v1:
 //   - RenderSpinUp durante warm-up (~50s Render spin-up)
 //   - ErrorMessage con textos amigables y botón "Intentar de nuevo"
@@ -8,17 +13,16 @@ import { useState, useRef } from 'react'
 import { useAccount } from 'wagmi'
 import { useKYC } from '../hooks/useKYC'
 import { ConnectWallet } from '../components/ui/ConnectWallet'
-import { RenderSpinUp } from '../components/ui/RenderSpinUp'
+import { RenderSpinUp, type MensajeEspera } from '../components/ui/RenderSpinUp'
 import { ErrorMessage } from '../components/ui/ErrorMessage'
 
-function fileToBase64(file: File): Promise<string> {
-  return new Promise((res, rej) => {
-    const r = new FileReader()
-    r.onload = () => res((r.result as string).split(',')[1])
-    r.onerror = rej
-    r.readAsDataURL(file)
-  })
-}
+// Peor caso medido: ~43 s de arranque en frío + 5 a 20 s de análisis ≈ 70 s.
+const MENSAJES_ANALISIS: MensajeEspera[] = [
+  { at: 0, text: 'Preparando y enviando tus imágenes de forma segura...' },
+  { at: 8, text: 'Estamos analizando tu documento y tu selfie...' },
+  { at: 30, text: 'Si el servicio estaba en reposo, puede tardar hasta un minuto más.' },
+  { at: 75, text: 'Ya casi. Gracias por tu paciencia.' },
+]
 
 // ── Indicador de pasos ───────────────────────────────────────────────────────
 function StepIndicator({ current }: { current: number }) {
@@ -59,22 +63,27 @@ function UploadCard({
   file,
   onSelect,
   inputRef,
+  disabled = false,
+  capture = 'environment',
 }: {
   title: string
   hint: string
   file: File | null
   onSelect: (f: File) => void
   inputRef: React.RefObject<HTMLInputElement>
+  disabled?: boolean
+  capture?: 'environment' | 'user'
 }) {
   return (
     <div className="border-2 border-dashed border-gray-200 rounded-2xl p-6 sm:p-8 text-center hover:border-emerald-400 transition-colors">
       <input
         ref={inputRef}
         type="file"
-        accept="image/*"
-        capture="environment"
+        accept="image/jpeg,image/png,image/*"
+        capture={capture}
         className="hidden"
-        onChange={e => { const f = e.target.files?.[0]; if (f) onSelect(f) }}
+        disabled={disabled}
+        onChange={e => { const f = e.target.files?.[0]; e.target.value = ''; if (f) onSelect(f) }}
       />
       <div className="text-3xl mb-3">{file ? '✅' : '📷'}</div>
       <h3 className="font-semibold text-gray-900 mb-1">{title}</h3>
@@ -85,10 +94,12 @@ function UploadCard({
       )}
 
       <button
+        type="button"
         onClick={() => inputRef.current?.click()}
+        disabled={disabled}
         className="w-full sm:w-auto bg-emerald-600 text-white px-6 py-3 rounded-xl
           text-sm font-medium hover:bg-emerald-700 active:scale-95 transition-all
-          min-h-[44px]"   // accesibilidad mobile: tap target ≥ 44px
+          min-h-[44px] disabled:opacity-50 disabled:cursor-not-allowed"   // accesibilidad mobile: tap target ≥ 44px
       >
         {file ? 'Cambiar imagen' : 'Seleccionar imagen'}
       </button>
@@ -100,9 +111,8 @@ function UploadCard({
 export default function KYCFlow() {
   const { address, isConnected } = useAccount()
   const {
-    step, loading, warming, warmElapsed,
-    error, docData, passport,
-    processDoc, processKYC, reset,
+    step, fase, servicio, error, aviso, passport, ocupado, documentoLeido,
+    processDoc, processKYC, reset, despertar,
   } = useKYC()
 
   const docRef = useRef<HTMLInputElement>(null)
@@ -134,16 +144,15 @@ export default function KYCFlow() {
   }
 
   async function handleDoc(file: File) {
+    if (ocupado) return
     setDocFile(file)
-    const b64 = await fileToBase64(file)
-    await processDoc(b64)
+    setSelfieFile(null)
+    await processDoc(file)
   }
 
   async function handleGenerate() {
-    if (!docFile || !selfieFile || !address) return
-    const doc64 = await fileToBase64(docFile)
-    const s64 = await fileToBase64(selfieFile)
-    await processKYC(doc64, s64, address)
+    if (ocupado || !documentoLeido || !selfieFile || !address) return
+    await processKYC(selfieFile, address)
   }
 
   function handleRetry() {
@@ -166,21 +175,44 @@ export default function KYCFlow() {
 
       <StepIndicator current={step} />
 
-      {/* Loading — warm-up de Render */}
-      {warming && (
+      {/* Aviso: despertando el servicio de agentes (no bloquea el flujo) */}
+      {servicio === 'despertando' && !ocupado && (
+        <div className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800" role="status" aria-live="polite">
+          <p className="font-medium">Estamos despertando el servicio, puede tardar hasta un minuto.</p>
+          <p className="mt-1 text-amber-700">Mientras tanto, puedes ir preparando la foto de tu cédula.</p>
+        </div>
+      )}
+      {servicio === 'no_disponible' && !ocupado && (
+        <div className="mb-6 rounded-xl border border-red-200 bg-red-50 p-4 text-sm text-red-700" role="alert">
+          <p className="font-medium">El servicio de verificación no respondió.</p>
+          <p className="mt-1">Puede estar en mantenimiento. Intenta de nuevo en unos minutos.</p>
+          <button type="button" onClick={() => void despertar()} className="mt-2 underline font-medium min-h-[44px]">
+            Reintentar
+          </button>
+        </div>
+      )}
+
+      {/* Progreso — preparando o enviando */}
+      {ocupado && (
         <RenderSpinUp
-          title="Conectando con el servidor de IA..."
-          elapsed={warmElapsed}
+          title={fase === 'preparando' ? 'Preparando tus imágenes...' : step === 1 ? 'Leyendo tu cédula...' : 'Verificando tu identidad...'}
+          mensajes={MENSAJES_ANALISIS}
+          esperado={70}
+          avisoTrasSegundos={125}
         />
       )}
 
-      {/* Loading — procesando IA (después del warm-up) */}
-      {loading && !warming && (
-        <RenderSpinUp title="La IA está analizando tu documento..." elapsed={0} />
+      {/* Revisión manual */}
+      {!ocupado && aviso && (
+        <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-6 text-center" role="status">
+          <div className="text-3xl mb-3">🕒</div>
+          <h2 className="font-semibold text-gray-900 mb-2">Verificación en revisión</h2>
+          <p className="text-sm text-gray-600">{aviso}</p>
+        </div>
       )}
 
       {/* Contenido de pasos — solo visible cuando no está cargando */}
-      {!loading && !warming && (
+      {!ocupado && !aviso && (
         <>
           {/* Error */}
           <ErrorMessage error={error} onRetry={handleRetry} onDismiss={() => reset()} />
@@ -193,11 +225,12 @@ export default function KYCFlow() {
               file={docFile}
               onSelect={handleDoc}
               inputRef={docRef as React.RefObject<HTMLInputElement>}
+              disabled={ocupado}
             />
-            {docData && (
+            {documentoLeido && (
               <div className="mt-3 flex items-center gap-2 text-sm text-emerald-700 font-medium px-1">
                 <span>✅</span>
-                <span>Documento procesado: {docData.nombre || docData.name || 'OK'}</span>
+                <span>Leímos tu cédula correctamente</span>
               </div>
             )}
           </div>
@@ -211,6 +244,8 @@ export default function KYCFlow() {
                 file={selfieFile}
                 onSelect={f => setSelfieFile(f)}
                 inputRef={selfieRef as React.RefObject<HTMLInputElement>}
+                disabled={ocupado}
+                capture="user"
               />
             </div>
           )}
@@ -218,10 +253,13 @@ export default function KYCFlow() {
           {/* Paso 3 — Generar passport */}
           {step >= 2 && selfieFile && !error && (
             <button
+              type="button"
               onClick={handleGenerate}
+              disabled={ocupado}
+              aria-disabled={ocupado}
               className="w-full bg-emerald-600 text-white py-4 rounded-2xl text-base sm:text-lg
                 font-semibold hover:bg-emerald-700 active:scale-95 transition-all
-                shadow-lg shadow-emerald-200 min-h-[56px]"
+                shadow-lg shadow-emerald-200 min-h-[56px] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               🪪 Generar mi SSI Passport
             </button>

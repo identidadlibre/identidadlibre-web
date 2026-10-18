@@ -1,104 +1,112 @@
-// src/lib/api.ts — v2 con warm-up detection para Render free tier
-// Bloque H: detecta el spin-up de ~50s y notifica el progreso
+// src/lib/api.ts — v3 (tarea 1.5): el navegador solo llama a /api/kyc/* (proxy
+// de Vercel). El secreto X-Agents-Secret y la URL de los agentes viven solo
+// en el servidor; VITE_AGENTS_URL ya no se usa.
 
-const BASE = import.meta.env.VITE_AGENTS_URL
+/** 130 s: la función tiene maxDuration 120 s y 110 s hacia los agentes. */
+export const TIMEOUT_CLIENTE_MS = 130_000
 
-// Timeout generoso: 90s para dar margen al spin-up de Render (~50s) + tiempo real de IA
-const TIMEOUT_MS = 90_000
+export interface ErrorKyc { titulo: string; detalle: string }
 
-async function fetchWithTimeout(url: string, options: RequestInit): Promise<Response> {
-  const controller = new AbortController()
-  const id = setTimeout(() => controller.abort(), TIMEOUT_MS)
+export const ERRORES = {
+  sinConexion: {
+    titulo: 'No pudimos conectarnos',
+    detalle: 'Revisa tu conexión a internet e intenta de nuevo.',
+  },
+  tiempoAgotado: {
+    titulo: 'La verificación tardó demasiado',
+    detalle: 'El servicio está muy ocupado. Intenta de nuevo en unos minutos.',
+  },
+  inesperado: {
+    titulo: 'Algo salió mal',
+    detalle: 'No pudimos completar la verificación. Intenta de nuevo en unos minutos.',
+  },
+  imagen: {
+    titulo: 'No pudimos preparar la imagen',
+    detalle: 'Intenta con otra foto en formato JPG o PNG.',
+  },
+} satisfies Record<string, ErrorKyc>
 
-  try {
-    const res = await fetch(url, { ...options, signal: controller.signal })
-    clearTimeout(id)
-    return res
-  } catch (err: any) {
-    clearTimeout(id)
-    if (err.name === 'AbortError') {
-      throw new Error('timeout')
-    }
-    throw err
+export class FalloKyc extends Error {
+  readonly error: ErrorKyc
+  constructor(error: ErrorKyc) {
+    super(error.titulo)
+    this.error = error
   }
 }
 
-/** Warm-up: llama /health primero para despertar Render antes del pipeline real */
-export async function warmUp(
-  onProgress?: (seconds: number) => void
-): Promise<boolean> {
-  const start = Date.now()
-
-  return new Promise(resolve => {
-    let attempts = 0
-    const MAX = 20 // 20 × 3s = 60s máx
-
-    const tick = setInterval(async () => {
-      attempts++
-      const elapsed = Math.round((Date.now() - start) / 1000)
-      onProgress?.(elapsed)
-
-      try {
-        const res = await fetch(`${BASE}/health`, {
-          signal: AbortSignal.timeout(4000),
-        })
-        if (res.ok) {
-          clearInterval(tick)
-          resolve(true)
-        }
-      } catch {
-        // sigue intentando
-      }
-
-      if (attempts >= MAX) {
-        clearInterval(tick)
-        resolve(false) // falló el warm-up pero dejamos intentar igual
-      }
-    }, 3000)
-
-    // Primer intento inmediato
-    fetch(`${BASE}/health`, { signal: AbortSignal.timeout(4000) })
-      .then(r => {
-        if (r.ok) { clearInterval(tick); resolve(true) }
-      })
-      .catch(() => {})
-  })
+const TITULOS: Record<string, string> = {
+  imagen_grande: 'La imagen es demasiado pesada',
+  tipo_no_permitido: 'Formato de imagen no válido',
+  falta_imagen: 'Falta una imagen',
+  wallet_invalida: 'Wallet no válida',
+  demasiadas_solicitudes: 'Demasiados intentos',
+  servicio_no_disponible: 'Servicio no disponible',
+  tiempo_agotado: 'La verificación tardó demasiado',
+  error_procesamiento: 'No pudimos procesar tus imágenes',
 }
 
-export async function extractDocument(imageBase64: string) {
-  const res = await fetchWithTimeout(`${BASE}/kyc/extract-document`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ image: imageBase64 }),
-  })
-  if (!res.ok) throw new Error(await res.text())
-  return res.json()
+/** Convierte la respuesta de error del proxy en un mensaje amigable (sin códigos). */
+export function errorDesdeRespuesta(cuerpo: unknown): ErrorKyc {
+  const c = (typeof cuerpo === 'object' && cuerpo !== null ? cuerpo : {}) as { motivo?: unknown; mensaje?: unknown }
+  const titulo = typeof c.motivo === 'string' ? TITULOS[c.motivo] : undefined
+  const detalle = typeof c.mensaje === 'string' && c.mensaje.length <= 300 ? c.mensaje : undefined
+  return titulo && detalle ? { titulo, detalle } : ERRORES.inesperado
 }
 
-export async function compareFaces(doc64: string, selfie64: string) {
-  const res = await fetchWithTimeout(`${BASE}/kyc/compare-faces`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ document_image: doc64, selfie_image: selfie64 }),
-  })
-  if (!res.ok) throw new Error(await res.text())
-  return res.json()
+async function pedir(ruta: string, init: RequestInit = {}, timeoutMs = TIMEOUT_CLIENTE_MS): Promise<unknown> {
+  let res: Response
+  try {
+    res = await fetch(ruta, { ...init, signal: AbortSignal.timeout(timeoutMs) })
+  } catch (e) {
+    const agotado = e instanceof DOMException && (e.name === 'TimeoutError' || e.name === 'AbortError')
+    throw new FalloKyc(agotado ? ERRORES.tiempoAgotado : ERRORES.sinConexion)
+  }
+  const cuerpo = await res.json().catch(() => null)
+  if (!res.ok) throw new FalloKyc(errorDesdeRespuesta(cuerpo))
+  return cuerpo
 }
 
-export async function fullPipeline(
-  doc64: string,
-  selfie64: string,
-  walletAddress: string
-) {
-  const res = await fetchWithTimeout(`${BASE}/kyc/full-pipeline`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      document_image: doc64,
-      selfie_image: selfie64,
-      wallet_address: walletAddress,
-    }),
-  })
-  if (!res.ok) throw new Error(await res.text())
-  return res.json()
+/**
+ * Despierta el servicio de agentes (Render puede tardar ~45 s en arrancar).
+ * Nunca lanza: devuelve true si responde.
+ */
+export async function despertarServicio(): Promise<boolean> {
+  try {
+    const c = await pedir('/api/kyc/salud', {}, 70_000) as { disponible?: unknown }
+    return c?.disponible === true
+  } catch {
+    return false
+  }
+}
+
+export async function enviarDocumento(documento: Blob): Promise<{ legible: boolean }> {
+  const f = new FormData()
+  f.append('documento', documento, 'documento.jpg')
+  const c = await pedir('/api/kyc/documento', { method: 'POST', body: f }) as { ok?: unknown; legible?: unknown }
+  if (c?.ok !== true || typeof c.legible !== 'boolean') throw new FalloKyc(ERRORES.inesperado)
+  return { legible: c.legible }
+}
+
+export type ResultadoVerificacion =
+  | { decision: 'APPROVED'; passport: Record<string, unknown> }
+  | { decision: 'MANUAL_REVIEW' | 'REJECTED'; mensaje: string }
+
+/** Fallo cerrado: cualquier respuesta que no sea una de las tres esperadas es un error. */
+export function interpretarVerificacion(c: unknown): ResultadoVerificacion {
+  const r = (typeof c === 'object' && c !== null ? c : {}) as Record<string, unknown>
+  if (r.ok === true && r.decision === 'APPROVED' && typeof r.passport === 'object' && r.passport !== null) {
+    return { decision: 'APPROVED', passport: r.passport as Record<string, unknown> }
+  }
+  if (r.ok === true && (r.decision === 'MANUAL_REVIEW' || r.decision === 'REJECTED') && typeof r.mensaje === 'string') {
+    return { decision: r.decision, mensaje: r.mensaje }
+  }
+  throw new FalloKyc(ERRORES.inesperado)
+}
+
+export async function enviarVerificacion(documento: Blob, selfie: Blob, wallet: string): Promise<ResultadoVerificacion> {
+  const f = new FormData()
+  f.append('documento', documento, 'documento.jpg')
+  f.append('selfie', selfie, 'selfie.jpg')
+  f.append('wallet', wallet)
+  return interpretarVerificacion(await pedir('/api/kyc/verificacion', { method: 'POST', body: f }))
 }

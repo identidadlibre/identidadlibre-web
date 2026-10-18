@@ -1,8 +1,11 @@
 // src/components/ui/ErrorMessage.tsx
 // Bloque H — Errores amigables con mensajes contextuales
 
+export interface ErrorAmigable { titulo: string; detalle: string }
+
 interface Props {
-  error: string | null
+  /** Texto técnico (se traduce con humanize) o un error ya amigable */
+  error: string | ErrorAmigable | null
   onRetry?: () => void
   onDismiss?: () => void
 }
@@ -63,10 +66,12 @@ function humanize(raw: string): { title: string; detail: string } {
 export function ErrorMessage({ error, onRetry, onDismiss }: Props) {
   if (!error) return null
 
-  const { title, detail } = humanize(error)
+  const { title, detail } = typeof error === 'string'
+    ? humanize(error)
+    : { title: error.titulo, detail: error.detalle }
 
   return (
-    <div className="rounded-xl border border-red-200 bg-red-50 p-4 mt-4">
+    <div className="rounded-xl border border-red-200 bg-red-50 p-4 mt-4" role="alert">
       <div className="flex items-start gap-3">
         {/* Icono */}
         <div className="shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center text-red-600 font-bold text-sm">

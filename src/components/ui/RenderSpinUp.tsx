@@ -4,7 +4,9 @@
 
 import { useEffect, useState } from 'react'
 
-const MESSAGES = [
+export interface MensajeEspera { at: number; text: string }
+
+const MESSAGES: MensajeEspera[] = [
   { at: 0,  text: 'Conectando con el servidor...' },
   { at: 8,  text: 'El servidor está arrancando, esto puede tardar ~50 segundos la primera vez...' },
   { at: 20, text: 'Casi listo — los servidores gratuitos se duermen cuando no hay actividad 😴' },
@@ -17,9 +19,16 @@ interface Props {
   title?: string
   /** Segundos que lleva esperando (se puede controlar externamente) */
   elapsed?: number
+  /** Mensajes según los segundos transcurridos (por defecto: arranque del servidor) */
+  mensajes?: MensajeEspera[]
+  /** Segundos esperados (barra de progreso) y a partir de cuándo sugerir recargar */
+  esperado?: number
+  avisoTrasSegundos?: number
 }
 
-export function RenderSpinUp({ title = 'Procesando...', elapsed }: Props) {
+export function RenderSpinUp({
+  title = 'Procesando...', elapsed, mensajes = MESSAGES, esperado = 55, avisoTrasSegundos = 55,
+}: Props) {
   const [seconds, setSeconds] = useState(elapsed ?? 0)
 
   useEffect(() => {
@@ -28,14 +37,14 @@ export function RenderSpinUp({ title = 'Procesando...', elapsed }: Props) {
     return () => clearInterval(id)
   }, [elapsed])
 
-  const current = [...MESSAGES]
+  const current = [...mensajes]
     .reverse()
     .find(m => seconds >= m.at)
 
-  const pct = Math.min((seconds / 55) * 100, 95)
+  const pct = Math.min((seconds / esperado) * 100, 95)
 
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-6 text-center">
+    <div className="flex flex-col items-center justify-center py-16 px-6 text-center" role="status" aria-live="polite">
       {/* Spinner animado */}
       <div className="relative mb-6">
         <div className="w-16 h-16 rounded-full border-4 border-emerald-100 border-t-emerald-600 animate-spin" />
@@ -58,7 +67,7 @@ export function RenderSpinUp({ title = 'Procesando...', elapsed }: Props) {
         />
       </div>
 
-      {seconds > 55 && (
+      {seconds > avisoTrasSegundos && (
         <p className="mt-4 text-xs text-amber-600 max-w-xs">
           Está tardando más de lo esperado. Puedes{' '}
           <button
