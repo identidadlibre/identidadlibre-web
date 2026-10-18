@@ -1,0 +1,15 @@
+# Configuración de gitleaks para TokenIDS.
+# Usa todas las reglas por defecto y solo exceptúa falsos positivos verificados.
+[extend]
+useDefault = true
+
+[[allowlists]]
+description = "Direcciones EVM públicas (contratos desplegados en Polygon Amoy); no son secretos"
+regexTarget = "secret"
+regexes = ['''^0x[0-9a-fA-F]{40}$''']
+
+[[allowlists]]
+description = "Token público del badge de CircleCI que trae la plantilla de NestJS"
+paths = ['''^backend/README\.md$''']
+regexTarget = "match"
+regexes = ['''img\.shields\.io/circleci/''']
